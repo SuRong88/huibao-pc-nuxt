@@ -30,26 +30,9 @@ export default {
     });
   },
 
-  // mounted() {
-  //     window.addEventListener('scroll',() => {
-  //         this.show = document.documentElement.scrollTop > 500 ? true : false;
-  //     })
-  //     window.scroll();
-  // },
-
-  // data(){
-  //     return{
-  //         show:false
-  //     }
-  // },
-
   computed: {},
 
-  methods: {
-    scrollTop() {
-      window.scroll(0, 0);
-    }
-  }
+  methods: {}
 };
 </script>
 

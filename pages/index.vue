@@ -1,6 +1,6 @@
 <template>
   <div class="index-page">
-    <v-nav></v-nav>
+    <v-header></v-header>
     <main></main>
     <v-footer></v-footer>
   </div>
@@ -8,8 +8,6 @@
 
 <script>
 import URL from '@/plugins/url.js';
-import vNav from '@/components/vNav.vue';
-import vFooter from '@/components/vFooter.vue';
 export default {
   // default模板
   // layout: function(context) {
@@ -21,8 +19,12 @@ export default {
   //   return /^\d+$/.test(params.id);
   // },
   components: {
-    vNav,
-    vFooter
+    vHeader(resolve) {
+      require(['@/components/vHeader'], resolve);
+    },
+    vFooter(resolve) {
+      require(['@/components/vFooter'], resolve);
+    }
   },
   head() {
     return {

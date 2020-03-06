@@ -1,5 +1,7 @@
 <template>
-  <footer class="v-footer"></footer>
+  <footer class="v-footer">
+      footer
+  </footer>
 </template>
 
 <script>
@@ -12,4 +14,6 @@ export default {
 };
 </script>
 
-<style lang="less"></style>
+<style lang="less">
+  .v-footer{}
+</style>

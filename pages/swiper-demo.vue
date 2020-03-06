@@ -14,12 +14,14 @@
 
 <script>
 import URL from '@/plugins/url.js';
-import vNav from '@/components/vNav.vue';
-import vFooter from '@/components/vFooter.vue';
 export default {
   components: {
-    vNav,
-    vFooter
+   vHeader(resolve) {
+     require(['@/components/vHeader'], resolve);
+   },
+   vFooter(resolve) {
+     require(['@/components/vFooter'], resolve);
+   }
   },
   created() {
     this.$successToast('成功');

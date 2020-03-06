@@ -1,7 +1,6 @@
 <template>
-  <!-- 说明：根据需要命名vHeader亦可 一般来说头部基本就是导航栏 -->
-  <!-- 根据需要调整 -->
-  <header class="v-nav">
+  <header class="v-header">
+    header
     <ul class="nav-menu">
       <li class="nav-item nav-item-active"></li>
     </ul>
@@ -31,4 +30,6 @@ export default {
 };
 </script>
 
-<style lang="less"></style>
+<style lang="less">
+  .v-header{}
+</style>
