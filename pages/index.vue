@@ -1,8 +1,17 @@
 <template>
   <div class="index-page">
-    <v-header></v-header>
-    <main></main>
-    <v-footer></v-footer>
+    <v-sidebar></v-sidebar>
+    <main class="index-main">
+      <no-ssr>
+        <swiper v-if="bannerList.length" class="index-banner" :options="swiperOption" ref="mySwiper">
+          <swiper-slide v-for="item in bannerList" class="swiper-item">
+            <nuxt-link tag="div" class="swiper-item-inner" :style="'background-image: url(' + item.coverUrl + ');'" :to="'/'" :title="item.title"></nuxt-link>
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
+      </no-ssr>
+      <div v-show="swiperIndex < bannerList.length - 1" class="view-more">下滑查看更多</div>
+    </main>
   </div>
 </template>
 
@@ -19,11 +28,8 @@ export default {
   //   return /^\d+$/.test(params.id);
   // },
   components: {
-    vHeader(resolve) {
-      require(['@/components/vHeader'], resolve);
-    },
-    vFooter(resolve) {
-      require(['@/components/vFooter'], resolve);
+    vSidebar(resolve) {
+      require(['@/components/vSidebar'], resolve);
     }
   },
   head() {
@@ -66,7 +72,46 @@ export default {
   created() {},
   data() {
     return {
-      SEOInfo: {}
+      SEOInfo: {},
+      swiperIndex: 0,
+      swiperOption: {
+        loop: false,
+        speed: 1000,
+        direction: 'vertical',
+        mousewheelControl: true,
+        // 接受鼠标“拖动”控制
+        simulateTouch: false,
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        autoplayDisableOnInteraction: true,
+        onInit: function(swiper) {},
+        onTransitionStart: swiper => {
+          console.log(swiper.realIndex);
+          this.swiperIndex = swiper.realIndex;
+        }
+        // onTransitionEnd: swiper => {
+        //   console.log(swiper.realIndex);
+        //   console.log(this);
+        //   this.swiperIndex = swiper.realIndex;
+        // }
+      },
+      bannerList: [
+        {
+          title: '轮播title1',
+          link: '/target01',
+          coverUrl: require('@/assets/images/index/banner.jpg')
+        },
+        {
+          title: '轮播title2',
+          link: '/target02',
+          coverUrl: require('@/assets/images/index/banner.jpg')
+        },
+        {
+          title: '轮播title3',
+          link: '/target03',
+          coverUrl: require('@/assets/images/index/banner.jpg')
+        }
+      ]
     };
   }
 };

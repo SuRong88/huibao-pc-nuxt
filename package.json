@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-demo-pc",
+  "name": "huibao-pc",
   "version": "1.0.0",
   "description": "Nuxt.js project description",
   "author": "",
@@ -22,6 +22,7 @@
     "element-ui": "^2.4.11",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
+    "moment": "^2.24.0",
     "nuxt": "^2.0.0",
     "vue-awesome-swiper": "2.6.7",
     "wowjs": "^1.1.3"
