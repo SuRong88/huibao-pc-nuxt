@@ -51,7 +51,28 @@
             </li>
           </ul>
         </div>
-        <div class="our-news-box"><h3 class="news-tit">我们的大事件</h3></div>
+        <div class="our-news-box">
+          <h3 class="news-tit">我们的大事件</h3>
+          <div class="news-box flex">
+            <div class="box-l"><ul class="news-pagination swiper-pagination" slot="pagination"></ul></div>
+            <div class="box-r">
+              <no-ssr>
+                <swiper v-if="newsList.length" class="news-swiper" :options="swiperOption" ref="mySwiper">
+                  <swiper-slide v-for="(item, index) in newsList" class="swiper-item">
+                    <div class="slide-top flex flex-ver flex-end">
+                      <span class="date">{{ item.date | dateformat('YYYY.MM') }}</span>
+                      <img class="date-icon" src="@/assets/images/icons/year.png" alt="" />
+                    </div>
+                    <div class="slide-bottom">
+                      <p class="slide-tit">{{ index }}{{ item.title }}</p>
+                      <img v-if="item.coverUrl" class="slide-img" :src="item.coverUrl" alt="" />
+                    </div>
+                  </swiper-slide>
+                </swiper>
+              </no-ssr>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </div>
@@ -114,8 +135,68 @@ export default {
   },
   created() {},
   data() {
+    let that = this;
     return {
-      SEOInfo: {}
+      SEOInfo: {},
+      swiperOption: {
+        loop: false,
+        speed: 800,
+        direction: 'vertical',
+        // mousewheelControl: true,
+        simulateTouch: true,
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        paginationBulletRender: (swiper, index, className) => {
+          return '<li class="' + className + '">' + that.years[index] + ' ~</li>';
+        },
+        effect: 'coverflow',
+        slidesPerView: 3,
+        spaceBetween: 5,
+        centeredSlides: true,
+        slidesPerView: 3,
+        // loopFillGroupWithBlank: true,
+        coverflow: {
+          rotate: 0,
+          stretch: 0,
+          depth: 0,
+          modifier: 1,
+          slideShadows: false
+        },
+        autoplayDisableOnInteraction: true
+      },
+      years: [2001, 2002, 2003, 2004, 2005, 2006, 2007],
+      newsList: [
+        {
+          title: '荟宝三大系列108单品亮相全国。',
+          date: '2001-12-01 15:01:22',
+          coverUrl: require('@/assets/images/culture/6.jpg')
+        },
+        {
+          title: '荟宝三大系列108单品亮相全国。',
+          date: '2002-12-01 15:01:22',
+          coverUrl: require('@/assets/images/others/1.jpg')
+        },
+        {
+          title: '荟宝三大系列108单品亮相全国。',
+          date: '2003-12-01 15:01:22',
+          coverUrl: require('@/assets/images/others/2.jpg')
+        },
+        {
+          title: '荟宝三大系列108单品亮相全国。',
+          date: '2004-12-01 15:01:22',
+          coverUrl: require('@/assets/images/others/3.jpg')
+        },
+        {
+          title: '荟宝三大系列108单品亮相全国。',
+          date: '2005-12-01 15:01:22'
+          // coverUrl: require('@/assets/images/others/4.jpg')
+        },
+        {
+          title: '荟宝三大系列108单品亮相全国。',
+          date: '2006-12-01 15:01:22',
+          coverUrl: require('@/assets/images/others/5.jpg')
+        }
+      ]
     };
   },
   computed: {}

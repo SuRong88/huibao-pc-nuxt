@@ -42,7 +42,7 @@
               <li class="show-item">
                 <div class="img-box">
                   <img class="img" src="@/assets/images/culture/Taste.jpg" alt="" />
-                  <img class="tag" src="@/assets/images/culture/Touch.png" alt="" />
+                  <img class="tag" src="@/assets/images/culture/Taste.png" alt="" />
                 </div>
                 <div class="item-desc">
                   品尝用天然芦荟制作而成的

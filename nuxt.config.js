@@ -66,13 +66,8 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/toast'
+    '@nuxtjs/axios'
   ],
-  toast: { // toast模块的配置
-    position: 'top-center',
-    duration: 2000
-  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

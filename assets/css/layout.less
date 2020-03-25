@@ -195,6 +195,7 @@ h6 {
 a {
   text-decoration: none;
   color: #555;
+  cursor: pointer;
 }
 
 img {
@@ -211,7 +212,7 @@ textarea {
   -moz-appearance: none;
   -webkit-appearance: none;
   .bs_bb();
-  .box_shadow(0 0 0px 1000px white inset);
+  // .box_shadow(0 0 0px 1000px white inset);
   outline: none;
   font-size: 14px;
   color: #555;
@@ -944,7 +945,7 @@ input::-moz-placeholder {
       .intro-box {
         height: 660px;
         position: relative;
-        background: url(../images/culture/bg-top.png) top center/cover no-repeat;
+        background: url(../images/culture/BG1.jpg) top center/cover no-repeat;
         .intro-txt-box {
           width: 670px;
           position: absolute;
@@ -959,7 +960,7 @@ input::-moz-placeholder {
         }
       }
       .intro-box2 {
-        background: url(../images/culture/bg.png) center/cover repeat-y;
+        background: url(../images/culture/BG2.jpg) center/cover repeat-y;
         padding-bottom: 125px;
         .intro-list {
           width: 695px;
@@ -1200,6 +1201,7 @@ input::-moz-placeholder {
 *****************************/
 .development-page {
   padding-left: 280px;
+  padding-bottom: 100px;
   .main-banner {
     background-image: url(../images/culture/4linan.jpg);
   }
@@ -1243,7 +1245,7 @@ input::-moz-placeholder {
 
     .mul-box {
       height: 470px;
-      background-color: pink;
+      background: url(../images/culture/beijing.jpg) center/cover repeat-y;
       .mul-list {
         padding-top: 106px;
         width: 980px;
@@ -1273,12 +1275,131 @@ input::-moz-placeholder {
       }
     }
     .our-news-box {
+      .swiper-container {
+        height: 100%;
+      }
+      .swiper-wrapper {
+      }
+      .swiper-item {
+        // height: auto!important;
+        * {
+          .transition(all 0.5s);
+        }
+        &.swiper-slide-prev,
+        &.swiper-slide-nuxt {
+          flex: 1 !important;
+          height: auto !important;
+          .slide-top {
+            padding: 0;
+          }
+        }
+        &.swiper-slide-active {
+          height: auto !important;
+          flex: 2 !important;
+          .slide-top {
+            padding: 10px 0;
+          }
+          .slide-bottom {
+            min-height: 200px !important;
+            border-left: 1px solid @color!important;
+            padding: 24px 40px 48px !important;
+          }
+          .date {
+            color: @color!important;
+          }
+          .date-icon {
+            width: 22px !important;
+            height: 22px !important;
+            margin-right: -1px;
+          }
+          .slide-tit {
+            margin-bottom: 24px !important;
+            font-size: 24px !important;
+            color: rgba(51, 51, 51, 1) !important;
+          }
+          .slide-img {
+            width: 240px !important;
+          }
+        }
+      }
+      .swiper-pagination {
+        display: block;
+        position: static;
+      }
+      .swiper-pagination-bullet {
+        display: block;
+        opacity: 1;
+        height: auto;
+        width: auto;
+        background: none;
+        font-size: 14px;
+        font-family: PingFang SC;
+        color: rgba(153, 153, 153, 1);
+        margin-bottom: 28px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        &.swiper-pagination-bullet-active {
+          color: @color;
+        }
+      }
       .news-tit {
         text-align: center;
         padding: 102px 0 84px;
         font-size: 30px;
         font-family: PingFang SC;
         color: @color;
+      }
+      .news-box {
+        padding-left: 16.5%;
+        .box-l {
+          width: 230px;
+          // height: 65;
+          background-color: pink;
+        }
+        .box-r {
+          width: 590px;
+          height: 680px;
+        }
+      }
+      .news-swiper {
+        .swiper-item {
+          .slide-top {
+            display: inline-block;
+            // padding: 10px 0;
+            line-height: 28px;
+            width: 120px;
+            text-align: right;
+          }
+          .date {
+            font-size: 20px;
+            font-family: PingFang SC;
+            color: rgba(210, 210, 210, 1);
+            display: inline-block;
+            margin-right: 7px;
+          }
+          .date-icon {
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+          }
+          .slide-bottom {
+            min-height: 100px;
+            margin-left: 110px;
+            border-left: 1px solid rgba(191, 191, 191, 1);
+            padding: 10px 40px 20px;
+          }
+          .slide-tit {
+            line-height: 1;
+            margin-bottom: 15px;
+            font-family: PingFang SC;
+            font-size: 16px;
+            color: rgba(153, 153, 153, 1);
+          }
+          .slide-img {
+            width: 185px;
+          }
+        }
       }
     }
   }
@@ -1307,10 +1428,13 @@ input::-moz-placeholder {
       width: 100%;
     }
     .intro-box {
-      width: 308px;
+      // width: 308px;
+      width: 23%;
       position: absolute;
-      top: 123px;
-      right: 227px;
+      // top: 123px;
+      // right: 227px;
+      top: 9.2%;
+      right: 17%;
       .intro-tag {
         height: 25px;
       }
@@ -1340,9 +1464,11 @@ input::-moz-placeholder {
           margin-right: 0;
         }
         .item-img {
+          // width: 12.6%;
+          // height: 12.6%;
           width: 170px;
           height: 170px;
-          box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.04);
+          box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.1);
         }
         .item-txt {
           padding-top: 30px;
@@ -1363,98 +1489,40 @@ input::-moz-placeholder {
       }
     }
     .view-more {
+      cursor: pointer;
       position: absolute;
       bottom: 88px;
-      right: 170px;
+      // right: 170px;
+      right: 17.5%;
     }
-    .button {
-      .transition(background 0.3s ease-in-out, border 0.3s ease-in-out, box-shadow 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out;);
-    }
-    .in {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-    .button {
-      height: 80px;
-      width: 230px;
-      display: inline-block;
-      vertical-align: top;
-      display: block;
-      letter-spacing: 0.1em;
-      .t {
-        color: rgba(0, 0, 0, 0.4);
-        transition: all 0.3s ease-in-out;
-      }
-      .in {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-      }
-    }
-    .button-circle {
-      width: 98px;
-      .in {
-        -webkit-box-pack: end;
-        -ms-flex-pack: end;
-        justify-content: flex-end;
-      }
-    }
-    .button-svg {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 76px;
-      height: 76px;
-      margin-top: -38px;
-    }
-    .button-circle path.b {
-      -webkit-transition: all 0.3s ease-in-out;
-      -o-transition: all 0.3s ease-in-out;
-      transition: all 0.3s ease-in-out;
-    }
-    .button .b {
-      height: 1px;
-      width: 100%;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      background-color: rgba(0, 0, 0, 0.15);
-      overflow: hidden;
-    }
-
-    path.b {
-      fill: none;
-      stroke: rgba(0, 0, 0, 0.15);
-      stroke-miterlimit: 10;
-      stroke-width: 2px;
-    }
-    .button-circle path.f {
-      -webkit-transition: all 0.5s ease-in-out;
-      -o-transition: all 0.5s ease-in-out;
-      transition: all 0.5s ease-in-out;
-    }
-    .button-circle path.f {
-      stroke: #e57777;
-      stroke-dashoffset: 436;
-      stroke-dasharray: 436px;
-      -webkit-transform: rotate(120deg);
-      -ms-transform: rotate(120deg);
-      transform: rotate(120deg);
-      -webkit-transform-origin: 50% 50%;
-      -ms-transform-origin: 50% 50%;
+    .my-svg-path {
+      stroke-dasharray: 253px, 253px;
+      stroke-dashoffset: 253px;
+      transition: stroke-dashoffset 0.6s ease 0s, stroke 0.6s ease 0s;
+      transform: rotateZ(60deg) rotateY(180deg);
       transform-origin: 50% 50%;
+      transition: stroke-dashoffset 1.5s;
     }
-    path.f {
-      fill: none;
-      stroke: #000000;
-      stroke-miterlimit: 10;
-      stroke-width: 2px;
-      stroke-dashoffset: 252.378;
-      stroke-dasharray: 0px, 999999px;
+    #wrap,
+    #wrap2 {
+      &:hover {
+        .my-svg-path {
+          stroke-dashoffset: 0;
+        }
+        .txt {
+          color: @color;
+        }
+      }
+      .txt {
+        white-space: nowrap;
+        font-size: 16px;
+        font-family: PingFang SC;
+        color: #999999;
+        .transition(all 0.8s);
+        position: absolute;
+        left: 55px;
+        bottom: 15px;
+      }
     }
   }
 }
@@ -1466,21 +1534,240 @@ input::-moz-placeholder {
   .main-banner {
     background-image: url(../images/others/Applicationprocedure.jpg);
   }
-  .procedure-wrapper{
+  .procedure-wrapper {
     text-align: center;
     padding: 67px 0 60px;
+  }
+}
+/*****************************
+荟宝动态
+*****************************/
+.news-page {
+  background-color: #fff;
+  padding-left: 280px;
+  padding-bottom: 105px;
+  .main-banner {
+    background-image: url(../images/others/news.jpg);
+  }
+  .news-wrapper {
+    .nav-list {
+      padding: 65px 0 70px;
+      .nav-item {
+        cursor: pointer;
+        line-height: 1;
+        margin-right: 78px;
+        font-size: 16px;
+        font-family: PingFang SC;
+        color: rgba(153, 153, 153, 1);
+        padding-bottom: 15px;
+        &:last-child {
+          margin-right: 0;
+        }
+        &.active {
+          color: @color;
+          border-bottom: 1px solid @color;
+        }
+      }
+    }
+    .news-list {
+      width: 1190px;
+      margin: 0 auto;
+      padding-bottom: 20px;
+      cursor: pointer;
+      .news-item {
+        line-height: 1;
+        width: calc(50% - 25px);
+        .transition(all 0.8s);
+        &:nth-child(odd) {
+          margin-right: 50px;
+        }
+        // &:hover{
+        //   .translateY(-2px);
+        //   .box_shadow(0px 0px 12px rgba(0, 0, 0, 0.3));
+        // }
+        .item-img {
+          width: 100%;
+          height: 288px;
+        }
+        .item-info {
+          height: 165px;
+        }
+        .item-tit {
+          .text_one();
+          padding: 26px 0 20px;
+          font-size: 26px;
+          font-family: PingFang SC;
+          color: rgba(34, 69, 51, 1);
+        }
+        .item-desc {
+          .text_one();
+          font-size: 16px;
+          font-family: PingFang SC;
+          font-weight: bold;
+          color: rgba(102, 102, 102, 1);
+          margin-bottom: 12px;
+        }
+        .item-other {
+          font-size: 14px;
+          font-family: PingFang SC;
+          color: rgba(153, 153, 153, 1);
+          .item-type {
+          }
+          .line {
+            display: inline-block;
+            font-size: 12px;
+            margin: 0 8px;
+            // vertical-align: middle;
+          }
+          .item-date {
+          }
+        }
+      }
+    }
+    .view-more {
+      display: block;
+      width: 368px;
+      height: 60px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 1);
+      border: 1px solid rgba(45, 85, 51, 1);
+      font-size: 24px;
+      font-family: PingFang SC;
+      color: rgba(27, 60, 43, 1);
+    }
+  }
+}
+/*****************************
+动态详情页
+*****************************/
+.detail-page {
+  background-color: #fff;
+  padding-left: 280px;
+  .main-banner {
+    background-image: url(../images/others/news.jpg);
+  }
+  .detail-wrapper {
+    // padding: 0 150px 150px;
+    padding: 0 13% 13%;
+    .detail-hd {
+      border-bottom: 1px solid rgba(191, 191, 191, 1);
+      .hd-inner {
+        padding: 5.6% 18.7% 5.9%;
+        .tit {
+          font-size: 30px;
+          line-height: 1.2;
+          font-family: PingFang SC;
+          font-weight: bold;
+          color: @color;
+          margin-bottom: 36px;
+        }
+        .others {
+          font-size: 16px;
+          font-family: PingFang SC;
+          color: rgba(153, 153, 153, 1);
+          .item-type {
+          }
+          .line {
+            display: inline-block;
+            font-size: 14px;
+            margin: 0 8px;
+          }
+          .item-date {
+          }
+        }
+      }
+    }
+    .detail-bd {
+      // padding: 0 16.7%;
+      padding: 0 12.5%;
+    }
   }
 }
 /*****************************
 联系我们
 *****************************/
 .contact-page {
+  background-color: #fff;
   padding-left: 280px;
   .main-banner {
     background-image: url(../images/others/contactus.jpg);
   }
-  .contact-wrapper{
-    padding: 67px 0 60px;
+  .contact-wrapper {
+    // padding: 67px 0 60px;
+    padding-bottom: 95px;
+    width: 1180px;
+    margin: 0 auto;
+  }
+  .contact-info {
+    padding-top: 76px;
+    flex-grow: 1;
+    text-align: center;
+    .info-logo {
+      display: inline-block;
+      margin-bottom: 58px;
+    }
+    .logo {
+      width: 124px;
+    }
+    .tel-txt {
+      font-size: 18px;
+      font-family: PingFang SC;
+      color: rgba(51, 51, 51, 1);
+      line-height: 18px;
+      margin-bottom: 28px;
+    }
+    .tel {
+      font-size: 36px;
+      font-family: Barlow;
+      font-weight: bold;
+      color: @color;
+      line-height: 1;
+    }
+  }
+  .contact-enter {
+    width: 716px;
+    flex-shrink: 0;
+    padding-top: 42px;
+    .enter-tit {
+      font-size: 20px;
+      font-family: PingFang SC;
+      font-weight: bold;
+      color: rgba(51, 51, 51, 1);
+      margin-bottom: 20px;
+    }
+    .enter-list {
+    }
+    .enter-item {
+      width: 350px;
+      height: 48px;
+      background: #efefef;
+      padding: 0 27px;
+      border: 0;
+      &.enter-item-mul {
+        width: 100%;
+        height: 118px;
+        .bs_bb();
+        margin-right: 0 !important;
+        padding: 18px 27px;
+      }
+      &:nth-child(odd) {
+        margin-right: 16px;
+      }
+      &:nth-child(n + 3) {
+        margin-top: 16px;
+      }
+    }
+    .btn-submit {
+      width: 200px;
+      height: 48px;
+      margin: 22px auto 0;
+      display: block;
+      font-size: 18px;
+      font-family: PingFang SC;
+      color: rgba(255, 255, 255, 1);
+      border: 0;
+      background: @color;
+    }
   }
 }
 /*****************************

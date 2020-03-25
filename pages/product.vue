@@ -32,21 +32,24 @@
           </ul>
           <img class="mul-img" src="@/assets/images/others/MyAloneGarden.png" alt="" />
           <div class="view-more">
-            <span class="button button-circle">
-              <div class="in">
-                <div class="t">DETAILS</div>
-                <div class="button-svg">
-                  <svg viewBox="0 0 160 160">
-                    <path class="b" d="M80,10.5A69.5,69.5,0,1,1,10.5,80,69.5,69.5,0,0,1,80,10.5"></path>
-                    <path class="f" d="M80,10.5A69.5,69.5,0,1,1,10.5,80,69.5,69.5,0,0,1,80,10.5"></path>
-                  </svg>
-                </div>
-              </div>
-            </span>
+            <div id="wrap" style="width: 77px;height: 77px;">
+              <svg viewBox="0 0 100 100">
+                <path d="M 50 50 m -40 0 a 40 40 0 1 0 80 0  a 40 40 0 1 0 -80 0" fill="none" stroke="#999" stroke-width="4">></path>
+                <path
+                  d="M 50 50 m -40 0 a 40 40 0 1 0 80 0  a 40 40 0 1 0 -80 0"
+                  fill="none"
+                  stroke="#2C5432"
+                  stroke-linecap="round"
+                  class="my-svg-path"
+                  transform="rotate(180,50,50)"
+                  stroke-width="4"
+                ></path>
+              </svg>
+              <p class="txt">查看更多</p>
+            </div>
           </div>
         </div>
       </div>
-
 
       <!-- 2 -->
       <div class="product-box product-box-type2">
@@ -79,17 +82,21 @@
           </ul>
           <img class="mul-img" src="@/assets/images/others/MyAloneGarden.png" alt="" />
           <div class="view-more">
-            <span class="button button-circle">
-              <div class="in">
-                <div class="t">DETAILS</div>
-                <div class="button-svg">
-                  <svg viewBox="0 0 160 160">
-                    <path class="b" d="M80,10.5A69.5,69.5,0,1,1,10.5,80,69.5,69.5,0,0,1,80,10.5"></path>
-                    <path class="f" d="M80,10.5A69.5,69.5,0,1,1,10.5,80,69.5,69.5,0,0,1,80,10.5"></path>
-                  </svg>
-                </div>
-              </div>
-            </span>
+            <div id="wrap2" style="width: 77px;height: 77px;">
+              <svg viewBox="0 0 100 100">
+                <path d="M 50 50 m -40 0 a 40 40 0 1 0 80 0  a 40 40 0 1 0 -80 0" fill="none" stroke="#999" stroke-width="4">></path>
+                <path
+                  d="M 50 50 m -40 0 a 40 40 0 1 0 80 0  a 40 40 0 1 0 -80 0"
+                  fill="none"
+                  stroke="#2C5432"
+                  stroke-linecap="round"
+                  class="my-svg-path"
+                  transform="rotate(180,50,50)"
+                  stroke-width="4"
+                ></path>
+              </svg>
+              <p class="txt">查看更多</p>
+            </div>
           </div>
         </div>
       </div>
@@ -162,6 +169,4 @@ export default {
 };
 </script>
 
-<style lang="less">
-
-</style>
+<style lang="less"></style>

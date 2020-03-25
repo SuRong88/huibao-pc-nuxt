@@ -188,7 +188,7 @@ export default {
     z-index: 800;
     width: 280px;
     height: 100vh;
-    cursor: pointer;
+    overflow-y: auto;
     padding: 168px 20px 20px 55px;
     // padding-left: 55px;
     // padding-right: 20px;
@@ -205,6 +205,7 @@ export default {
     }
     .nav-menu {
       .nav-item {
+        cursor: pointer;
         min-width: 60px;
         font-size: 16px;
         font-family: PingFang SC;
@@ -361,7 +362,8 @@ export default {
   .side-contact {
     position: absolute;
     left: 50%;
-    bottom: 182px;
+    // bottom: 182px;
+    bottom: 16.8vh;
     width: 100%;
     margin-left: -50%;
   }
