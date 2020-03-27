@@ -34,7 +34,7 @@
           <div class="view-more">
             <div id="wrap" style="width: 77px;height: 77px;">
               <svg viewBox="0 0 100 100">
-                <path d="M 50 50 m -40 0 a 40 40 0 1 0 80 0  a 40 40 0 1 0 -80 0" fill="none" stroke="#999" stroke-width="4">></path>
+                <path d="M 50 50 m -40 0 a 40 40 0 1 0 80 0  a 40 40 0 1 0 -80 0" fill="none" stroke="#999" stroke-width="2">></path>
                 <path
                   d="M 50 50 m -40 0 a 40 40 0 1 0 80 0  a 40 40 0 1 0 -80 0"
                   fill="none"
@@ -84,7 +84,7 @@
           <div class="view-more">
             <div id="wrap2" style="width: 77px;height: 77px;">
               <svg viewBox="0 0 100 100">
-                <path d="M 50 50 m -40 0 a 40 40 0 1 0 80 0  a 40 40 0 1 0 -80 0" fill="none" stroke="#999" stroke-width="4">></path>
+                <path d="M 50 50 m -40 0 a 40 40 0 1 0 80 0  a 40 40 0 1 0 -80 0" fill="none" stroke="#999" stroke-width="2">></path>
                 <path
                   d="M 50 50 m -40 0 a 40 40 0 1 0 80 0  a 40 40 0 1 0 -80 0"
                   fill="none"

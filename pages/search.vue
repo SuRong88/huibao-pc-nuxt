@@ -5,8 +5,8 @@
       <div class="search-wrapper">
         <div class="search-box">
           <div class="search-enter-box">
-            <input class="search-enter" placeholder="请输入搜索内容" type="text" />
-            <img class="search-icon" src="@/assets/images/side/search.png" alt="" />
+            <input v-model="keyword" @keyup.enter="searchHandle" class="search-enter" placeholder="请输入搜索内容" type="text" />
+            <img @click="searchHandle" class="search-icon" src="@/assets/images/side/search.png" alt="" />
           </div>
           <p v-if="list.length > 0" class="search-tip">
             为您找到相关结果
@@ -26,7 +26,7 @@
           </li>
         </ul>
         <!-- 2.无结果 -->
-        <p v-else class="no-result">抱歉，没有找到关于“{{keyword}}”的相关结果!</p>
+        <p v-else class="no-result">抱歉，没有找到关于“{{ keyword }}”的相关结果!</p>
       </div>
     </main>
   </div>
@@ -44,7 +44,7 @@ export default {
   //   // 必须是number类型
   //   return /^\d+$/.test(params.id);
   // },
-  watchQuery:true,
+  watchQuery: true,
   components: {
     vSidebar(resolve) {
       require(['@/components/vSidebar'], resolve);
@@ -67,7 +67,7 @@ export default {
       ]
     };
   },
-  async asyncData({ store, params,query, route, app }) {
+  async asyncData({ store, params, query, route, app }) {
     let SEOInfo = null;
     await app.$axios
       .get(URL.getSEOInfo, {
@@ -85,14 +85,14 @@ export default {
       });
     return {
       SEOInfo: SEOInfo,
-      keyword:query.keyword
+      keyword: query.keyword
     };
   },
   created() {},
   data() {
     return {
       SEOInfo: {},
-      keyword:'',
+      keyword: '',
       list: [
         {
           title: '专注芦荟二十年，荟宝为什么能节节攀高？',
@@ -120,6 +120,20 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    // 搜索
+    searchHandle() {
+      if (!this.keyword) {
+        return false;
+      }
+      this.$router.push({
+        query: {
+          keyword: this.keyword
+        },
+        path: '/search'
+      });
+    }
   }
 };
 </script>

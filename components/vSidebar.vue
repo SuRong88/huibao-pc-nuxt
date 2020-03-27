@@ -8,7 +8,7 @@
         <div></div>
       </a>
       <span>|</span>
-      <span class="text">{{isActived?'返回':'目录'}}</span>
+      <span class="text">{{ isActived ? '返回' : '目录' }}</span>
     </div>
     <!-- logo -->
     <h1 class="side-logo">
@@ -17,8 +17,8 @@
     </h1>
     <!-- 搜索 -->
     <div class="side-search">
-      <input class="search" placeholder="搜索" type="text" />
-      <img class="search-icon" src="@/assets/images/side/search.png" alt="" />
+      <input @keyup.enter="searchHandle" v-model="keyword" class="search" placeholder="搜索" type="text" />
+      <img @click="searchHandle" class="search-icon" src="@/assets/images/side/search.png" alt="" />
     </div>
     <!-- 官方联系 -->
     <div class="side-contact">
@@ -39,13 +39,9 @@
     <div class="side-nav" :class="{ open: isActived }">
       <ul class="nav-menu" v-if="navList.length">
         <li v-for="(item, index) in navList" class="nav-item active">
-          <span>
-            {{ item.name }}
-          </span>
+          <span>{{ item.name }}</span>
           <ol v-if="item.children.length" class="sub-nav-menu">
-            <li v-for="(subItem, subIndex) in item.children" class="sub-nav-item">
-             {{ subItem.name }}
-            </li>
+            <li v-for="(subItem, subIndex) in item.children" class="sub-nav-item">{{ subItem.name }}</li>
           </ol>
         </li>
       </ul>
@@ -55,7 +51,7 @@
 
 <script>
 export default {
-  name:'vSidebar',
+  name: 'vSidebar',
   created() {},
   data() {
     return {
@@ -152,7 +148,8 @@ export default {
           template: 0,
           children: []
         }
-      ]
+      ],
+      keyword: ''
     };
   },
   computed: {
@@ -162,8 +159,21 @@ export default {
   },
   watch: {},
   methods: {
+    // 侧边栏切换
     toggleSide() {
       this.isActived = !this.isActived;
+    },
+    // 侧边栏搜索
+    searchHandle() {
+      if (!this.keyword) {
+        return false;
+      }
+      this.$router.push({
+        query: {
+          keyword: this.keyword
+        },
+        path: '/search'
+      });
     }
   }
 };
@@ -219,8 +229,8 @@ export default {
         &:hover {
           color: @color;
         }
-        &.active{
-          span{
+        &.active {
+          span {
             line-height: 1;
             display: inline-block;
             padding-right: 10px;
