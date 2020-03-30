@@ -10,7 +10,10 @@
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </no-ssr>
-      <div v-show="swiperIndex < bannerList.length - 1" class="view-more">下滑查看更多</div>
+      <div v-show="swiperIndex < bannerList.length - 1" class="view-more">
+        <div class="line"></div>
+        <p class="txt">下滑查看更多</p>
+      </div>
     </main>
   </div>
 </template>

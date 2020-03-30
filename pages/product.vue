@@ -14,19 +14,31 @@
         <div class="mul-box">
           <ul class="product-list flex">
             <li class="product-item">
+              <div class="item-img-box">
+                
               <img class="item-img" src="@/assets/images/others/a.jpg" alt="" />
+              </div>
               <p class="item-txt">荟宝芦荟多肽提拉洁面乳</p>
             </li>
             <li class="product-item">
+              <div class="item-img-box">
+                
               <img class="item-img" src="@/assets/images/others/b.jpg" alt="" />
+              </div>
               <p class="item-txt">荟宝芦荟多肽提拉眼部精华液</p>
             </li>
             <li class="product-item">
+              <div class="item-img-box">
+                
               <img class="item-img" src="@/assets/images/others/c.jpg" alt="" />
+              </div>
               <p class="item-txt">荟宝芦荟多肽提拉洁面乳</p>
             </li>
             <li class="product-item">
+              <div class="item-img-box">
+                
               <img class="item-img" src="@/assets/images/others/d.jpg" alt="" />
+              </div>
               <p class="item-txt">荟宝芦荟多肽提拉洁面乳</p>
             </li>
           </ul>
@@ -64,19 +76,29 @@
         <div class="mul-box">
           <ul class="product-list flex">
             <li class="product-item">
+              <div class="item-img-box">
+                
               <img class="item-img" src="@/assets/images/others/e.jpg" alt="" />
+              </div>
               <p class="item-txt">荟宝芦荟多肽提拉洁面乳</p>
             </li>
             <li class="product-item">
+              <div class="item-img-box">
+                
               <img class="item-img" src="@/assets/images/others/f.jpg" alt="" />
+              </div>
               <p class="item-txt">荟宝芦荟多肽提拉眼部精华液</p>
             </li>
             <li class="product-item">
+              <div class="item-img-box">
               <img class="item-img" src="@/assets/images/others/g.jpg" alt="" />
+              </div>
               <p class="item-txt">荟宝芦荟多肽提拉洁面乳</p>
             </li>
             <li class="product-item">
+              <div class="item-img-box">
               <img class="item-img" src="@/assets/images/others/h.jpg" alt="" />
+              </div>
               <p class="item-txt">荟宝芦荟多肽提拉洁面乳</p>
             </li>
           </ul>

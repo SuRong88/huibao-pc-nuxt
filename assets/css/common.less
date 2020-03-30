@@ -3,12 +3,177 @@
 // 1920*1080--->>可视区域(1920*940)
 
 // 以下的划分暂不明确是否规范
+@media (max-width: 1280px) {
+  .common-banner {
+    height: 400px !important;
+  }
+  .product-page {
+    .product-main {
+      .intro-box {
+        width: 30%;
+        .intro-tit {
+          font-size: 20px!important;
+          margin: 10px 0 12px!important;
+        }
+        .intro-txt {
+          font-size: 11px!important;
+          line-height: 2;
+        }
+      }
+    }
+  }
+  .news-page  {
+    .news-wrapper .news-list{
+      width: 800px!important;
+      .item-img-box {
+          height: 200px!important;
+      }
+    }
+  }
+  .contact-page {
+    .contact-wrapper{
+      width: 800px!important;
+    }
+   .enter-item {
+        height: 40px!important;
+        &.enter-item-mul{
+          height: 80px!important;
+        }
+    }
+  }
+}
 @media (max-width: 1499px) {
+  .common-banner {
+    height: 420px;
+  }
+  .search-page {
+    .search-main {
+      padding: 92px 0 92px 450px;
+    }
+    .search-wrapper {
+      width: 720px;
+    }
+  }
+  .story-page {
+    .story-wrapper {
+      .show-box {
+        width: 800px !important;
+      }
+      .show-item {
+        .img-box {
+          height: 270px !important;
+        }
+      }
+    }
+  }
+  .about-page {
+    .about-wrapper {
+      width: 900px !important;
+    }
+    .show-item {
+      .item-l,
+      .item-r {
+        height: 300px !important;
+      }
+    }
+    .line-dot {
+      &:nth-child(1) {
+        top: 140px !important;
+      }
+      &:nth-child(2) {
+        top: 480px !important;
+      }
+      &:nth-child(3) {
+        top: 822px !important;
+      }
+      &:nth-child(4) {
+        top: 1160px !important;
+      }
+    }
+    .screen-control {
+      width: 350px !important;
+      height: 350px !important;
+      .control {
+        width: 136px !important;
+        height: 110px !important;
+        right: -60px !important;
+      }
+    }
+  }
+  .development-page {
+    .development-wrapper .about-box {
+      width: 880px;
+    }
+    .mul-box .mul-list {
+      width: 880px !important;
+    }
+  }
+  .product-page {
+    .product-main {
+      .intro-box {
+        width: 30%;
+        .intro-tit {
+          font-size: 25px;
+          line-height: 1.4;
+          margin: 10px 0 15px;
+        }
+        .intro-txt {
+          font-size: 12px;
+          line-height: 2;
+        }
+      }
+      .product-list {
+        top: -60px;
+        left: 50px;
+        .product-item {
+          width: 130px;
+        }
+      }
+      .mul-box {
+        padding-bottom: 180px !important;
+      }
+      .mul-box .mul-img {
+          width: 320px!important;
+      }
+      .view-more {
+        cursor: pointer;
+        position: absolute;
+        bottom: 50px;
+        right: 7%;
+      }
+    }
 
+    .item-img-box {
+      width: 100% !important;
+      height: 130px !important;
+    }
+  }
+  .news-page {
+    .news-list {
+      width: 980px!important;
+    }
+    .item-img-box {
+        height: 240px!important;
+    }
+  }
+  .contact-page {
+    .contact-wrapper{
+      width: 1000px;
+    }
+    .contact-enter{
+      width: 60.6%;
+    }
+  }
 }
 @media (min-width: 1500px) and (max-width: 1700px) {
-
+  .product-page {
+    .product-main {
+      .mul-box .mul-img {
+        top: -30px!important;
+          width: 380px!important;
+      }
+    }
+  }
 }
 @media (min-width: 1700px) {
-
 }

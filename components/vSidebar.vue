@@ -261,6 +261,7 @@ export default {
     margin: 0 auto 108px;
     position: relative;
     z-index: 900;
+    cursor: pointer;
     .menu-trigger {
       display: inline-block;
       vertical-align: middle;
