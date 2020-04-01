@@ -515,13 +515,14 @@ input::-moz-placeholder {
 公用分页器样式
 *****************************/
 #__nuxt .pagination {
+  padding-top: 20px;
   // 分页按钮大小颜色
   .el-pager {
     li {
       min-width: 40px;
       height: 40px;
       padding: 0px;
-      margin: 0px;
+      margin: 0px 5px;
       font-size: 14px;
       color: #666;
       line-height: 40px;
@@ -531,12 +532,11 @@ input::-moz-placeholder {
       border-right: 0;
       font-weight: 400;
       .bs_bb();
-      .border_rds(0px);
       &:last-child {
         // border-right: 1px solid #dddddd;
       }
       &:hover {
-        color: #177dff;
+        color: @color;
       }
       // ...按钮
       &.btn-quickprev,
@@ -546,7 +546,7 @@ input::-moz-placeholder {
       }
       // 当前页按钮样式
       &:not(.disabled).active {
-        background: #177dff;
+        background: @color;
         color: #fff;
         border: 0;
       }
@@ -559,7 +559,7 @@ input::-moz-placeholder {
     height: 40px;
     // padding: 0 16px;
     background-color: #fff;
-    border: 2px solid #f1f1f1;
+    // border: 2px solid #f1f1f1;
     &:hover {
       // color: #ff6600;
     }
@@ -686,34 +686,34 @@ input::-moz-placeholder {
   .bs_bb();
 }
 @keyframes arrow {
-    0% {
-      -webkit-transform: translate3d(-50%, 0, 0);
-      transform: translate3d(-50%, 0, 0);
-    }
-
-    60% {
-      -webkit-transform: translate3d(-50%, 50px, 0);
-      transform: translate3d(-50%, 50px, 0);
-    }
-
-    100% {
-      -webkit-transform: translate3d(-50%, 50px, 0);
-      transform: translate3d(-50%, 50px, 0);
-    }
+  0% {
+    -webkit-transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
   }
-  @keyframes t {
-    0% {
-      color: #fff;
-    }
 
-    60% {
-      color: #fff;
-    }
-
-    100% {
-      color: @color;
-    }
+  60% {
+    -webkit-transform: translate3d(-50%, 50px, 0);
+    transform: translate3d(-50%, 50px, 0);
   }
+
+  100% {
+    -webkit-transform: translate3d(-50%, 50px, 0);
+    transform: translate3d(-50%, 50px, 0);
+  }
+}
+@keyframes t {
+  0% {
+    color: #fff;
+  }
+
+  60% {
+    color: #fff;
+  }
+
+  100% {
+    color: @color;
+  }
+}
 /*****************************
 首页
 *****************************/
@@ -729,6 +729,7 @@ input::-moz-placeholder {
       .swiper-item-inner {
         background: center center/cover no-repeat;
         height: 100%;
+        display: block;
       }
     }
     .swiper-pagination-bullets {
@@ -781,18 +782,18 @@ input::-moz-placeholder {
       background-color: @color;
       overflow: hidden;
       &::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 1px;
-          width: 100%;
-          height: 100%;
-          background-color: #fff;
-          -webkit-animation: arrow 2.5s ease 0s infinite normal;
-          animation: arrow 2.5s ease 0s infinite normal;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 1px;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        -webkit-animation: arrow 2.5s ease 0s infinite normal;
+        animation: arrow 2.5s ease 0s infinite normal;
       }
     }
-    .txt{
+    .txt {
       animation: t 2.5s ease 0s infinite normal;
     }
   }
@@ -1221,10 +1222,10 @@ input::-moz-placeholder {
         position: absolute;
         top: 100px;
         left: 520px;
-        .img-box{
+        .img-box {
           height: 100%;
-          .img{
-           width: 100%;
+          .img {
+            width: 100%;
             height: 100%;
           }
         }
@@ -1547,6 +1548,7 @@ input::-moz-placeholder {
           height: 100%;
         }
         .item-txt {
+          .text_hide(2);
           padding-top: 30px;
           font-size: 12px;
           font-family: PingFang SC;
@@ -1574,10 +1576,12 @@ input::-moz-placeholder {
     .my-svg-path {
       stroke-dasharray: 253px, 253px;
       stroke-dashoffset: 253px;
-      transition: stroke-dashoffset 0.6s ease 0s, stroke 0.6s ease 0s;
-      transform: rotateZ(60deg) rotateY(180deg);
-      transform-origin: 50% 50%;
-      transition: stroke-dashoffset 1.5s;
+      -webkit-transform: rotateZ(60deg) rotateY(180deg);
+      -moz-transform: rotateZ(60deg) rotateY(180deg);
+      -ms-transform: rotateZ(60deg) rotateY(180deg);
+      -o-transform: rotateZ(60deg) rotateY(180deg);
+      .transform_o(50% 50%);
+      .transition(stroke-dashoffset 1.5s);
     }
     #wrap,
     #wrap2 {
@@ -1605,12 +1609,12 @@ input::-moz-placeholder {
 /*****************************
 申请办法
 *****************************/
-.procedure-page {
+.apply-page {
   padding-left: 280px;
   .main-banner {
     background-image: url(../images/others/Applicationprocedure.jpg);
   }
-  .procedure-wrapper {
+  .apply-wrapper {
     text-align: center;
     padding: 67px 0 60px;
   }
@@ -1657,10 +1661,10 @@ input::-moz-placeholder {
         &:nth-child(odd) {
           margin-right: 50px;
         }
-        &:hover{
-        .item-img {
-          .scale(1.1);
-        }
+        &:hover {
+          .item-img {
+            .scale(1.1);
+          }
         }
         .item-img-box {
           width: 100%;
@@ -1723,7 +1727,7 @@ input::-moz-placeholder {
 /*****************************
 动态详情页
 *****************************/
-.detail-page {
+.news-detail-page {
   background-color: #fff;
   padding-left: 280px;
   .main-banner {
@@ -1857,12 +1861,12 @@ input::-moz-placeholder {
 /*****************************
 荟宝优势
 *****************************/
-.investment-page {
+.advantage-page {
   padding-left: 280px;
   .main-banner {
     background-image: url(../images/others/Joininvestment.jpg);
   }
-  .investment-wrapper {
+  .advantage-wrapper {
     width: 774px;
     margin: 0 auto;
     .img {
@@ -1931,15 +1935,15 @@ input::-moz-placeholder {
     overflow: hidden;
     position: relative;
     &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 1px;
-        width: 100%;
-        height: 100%;
-        background-color: #fff;
-        -webkit-animation: arrow 2.5s ease 0s infinite normal;
-        animation: arrow 2.5s ease 0s infinite normal;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 1px;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      -webkit-animation: arrow 2.5s ease 0s infinite normal;
+      animation: arrow 2.5s ease 0s infinite normal;
     }
   }
   .txt {

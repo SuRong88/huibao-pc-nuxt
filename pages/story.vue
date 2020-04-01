@@ -119,9 +119,7 @@
                 </div>
               </li>
               <li class="intro-item">
-                <h3 class="item-tit">
-                  芦荟，治愈系植物
-                </h3>
+                <h3 class="item-tit">芦荟，治愈系植物</h3>
                 <img class="item-img" src="@/assets/images/culture/zhiwu.jpg" alt="" />
                 <div class="item-txt-box">
                   <p class="item-txt">我们相信，芦荟的价值被远远低估了。</p>
@@ -152,16 +150,6 @@
 <script>
 import URL from '@/plugins/url.js';
 export default {
-  // default模板
-  // layout: function(context) {
-  //   return 'default-demo';
-  // },
-  // 参数校验（失败直接跳转至404页面）
-  // validate({ params, route }) {
-  //   // 必须是number类型
-  //   return /^\d+$/.test(params.id);
-  // },
-  watchQuery: true,
   components: {
     vSidebar(resolve) {
       require(['@/components/vSidebar'], resolve);
@@ -185,23 +173,17 @@ export default {
     };
   },
   async asyncData({ store, params, query, route, app }) {
-    let SEOInfo = null;
-    await app.$axios
-      .get(URL.getSEOInfo, {
+    let [res01] = await Promise.all([
+      app.$axios.get(URL.getSEOInfo, {
         params: {
-          name: '/'
+          type: 'custom',
+          client: 1,
+          module_id: 'story'
         }
       })
-      .then(res => {
-        SEOInfo = res.data;
-        console.log('async请求成功');
-      })
-      .catch(err => {
-        console.log(err);
-        console.log('async请求失败');
-      });
+    ]);
     return {
-      SEOInfo: SEOInfo
+      SEOInfo: res01.data
     };
   },
   created() {},

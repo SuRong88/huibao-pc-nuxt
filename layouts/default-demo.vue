@@ -26,6 +26,7 @@ export default {
 
   created() {
     this.$axios.get(URL.getWebInfo).then(res => {
+      console.log(res);
       this.$store.commit('SET_WEBINFO', res.data);
     });
   },

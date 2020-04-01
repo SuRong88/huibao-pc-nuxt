@@ -5,26 +5,41 @@
       <div class="search-wrapper">
         <div class="search-box">
           <div class="search-enter-box">
-            <input v-model="keyword" @keyup.enter="searchHandle" class="search-enter" placeholder="请输入搜索内容" type="text" />
+            <input v-model="keyword0" @keyup.enter="searchHandle" class="search-enter" placeholder="请输入搜索内容" type="text" />
             <img @click="searchHandle" class="search-icon" src="@/assets/images/side/search.png" alt="" />
           </div>
           <p v-if="list.length > 0" class="search-tip">
             为您找到相关结果
-            <span>100</span>
+            <span>{{ total }}</span>
             个
           </p>
         </div>
         <!-- 1.有结果 -->
-        <ul v-if="list.length > 0" class="result-list">
-          <li v-for="(item, index) in list" class="result-item flex">
-            <div class="img-box"><img class="img" :src="item.coverUrl" alt="" /></div>
-            <div class="info-box">
-              <h2 class="item-tit">{{ item.title }}</h2>
-              <p class="item-desc">{{ item.desc }}</p>
-              <p class="item-date">{{ item.createTime | dateformat('YYYY.MM.DD') }}</p>
-            </div>
-          </li>
-        </ul>
+        <template v-if="list.length > 0">
+          <ul class="result-list">
+            <nuxt-link tag="li" :to="'/newsDetail/' + item.id" v-for="(item, index) in list" :key="index" class="result-item flex pointer">
+              <div class="img-box"><img class="img" :src="item.img" alt="" /></div>
+              <div class="info-box">
+                <h2 class="item-tit">{{ item.name }}</h2>
+                <p class="item-desc">{{ item.summary }}</p>
+                <p class="item-date">{{ item.time | dateformat('YYYY.MM.DD') }}</p>
+              </div>
+            </nuxt-link>
+          </ul>
+          <!-- 分页器 -->
+          <div class="flex flex-center">
+            <el-pagination
+              v-if="list.length"
+              @current-change="handleCurrentChange"
+              class="pagination"
+              background
+              layout="prev, pager, next"
+              :page-size="limit"
+              :current-page="current_page"
+              :page-count="total_page"
+            ></el-pagination>
+          </div>
+        </template>
         <!-- 2.无结果 -->
         <p v-else class="no-result">抱歉，没有找到关于“{{ keyword }}”的相关结果!</p>
       </div>
@@ -35,15 +50,10 @@
 <script>
 import URL from '@/plugins/url.js';
 export default {
-  // default模板
-  // layout: function(context) {
-  //   return 'default-demo';
-  // },
-  // 参数校验（失败直接跳转至404页面）
-  // validate({ params, route }) {
-  //   // 必须是number类型
-  //   return /^\d+$/.test(params.id);
-  // },
+  validate({ query, params, route }) {
+    // 必须是非空文本
+    return !/^[ ]+$/g.test(query.keyword);
+  },
   watchQuery: true,
   components: {
     vSidebar(resolve) {
@@ -68,70 +78,73 @@ export default {
     };
   },
   async asyncData({ store, params, query, route, app }) {
-    let SEOInfo = null;
-    await app.$axios
-      .get(URL.getSEOInfo, {
+    let [res01, res02] = await Promise.all([
+      app.$axios.get(URL.getArticleSearch, {
         params: {
-          name: '/'
+          keyword: query.keyword,
+          page: query.page || 1,
+          rownum: 8
+        }
+      }),
+      //全站通用seo
+      app.$axios.get(URL.getSEOInfo, {
+        params: {
+          type: 0,
+          client: 1,
+          module_id: 0
         }
       })
-      .then(res => {
-        SEOInfo = res.data;
-        console.log('async请求成功');
-      })
-      .catch(err => {
-        console.log(err);
-        console.log('async请求失败');
-      });
+    ]);
+    console.log(res01.data.list);
+    let pagination = res01.data.pagination;
     return {
-      SEOInfo: SEOInfo,
-      keyword: query.keyword
+      SEOInfo: res02.data,
+      keyword: query.keyword,
+      list: res01.data.list,
+      total_page: pagination.total_page,
+      current_page: pagination.current,
+      limit: pagination.rownum,
+      total: pagination.total
     };
   },
-  created() {},
+  created() {
+    if (this.$nullTest(this.$route.query.keyword)) {
+      this.$errorToast('请输入搜索内容');
+    }
+  },
   data() {
     return {
       SEOInfo: {},
+      // url
       keyword: '',
-      list: [
-        {
-          title: '专注芦荟二十年，荟宝为什么能节节攀高？',
-          desc:
-            '芦荟护肤的概念早已深入人心，市场上的芦荟品牌也是琳琅满目，而在芦荟领域深耕二十年的荟宝至今仍创新不断，继推出3X芦荟系列后，又构建了单品牌店商业新体系。荟宝为什么能持续为芦荟赋能？',
-          createTime: '2018-08-07 00:00:00',
-          link: '/target01',
-          coverUrl: require('@/assets/images/others/1.jpg')
-        },
-        {
-          title: '大事件|追梦20年，荟宝·我家的芦荟妆园20周年盛典璀璨绽放',
-          desc:
-            '芦荟护肤的概念早已深入人心，市场上的芦荟品牌也是琳琅满目，而在芦荟领域深耕二十年的荟宝至今仍创新不断，继推出3X芦荟系列后，又构建了单品牌店商业新体系。荟宝为什么能持续为芦荟赋能？',
-          createTime: '2018-08-07 00:00:00',
-          link: '/target01',
-          coverUrl: require('@/assets/images/others/2.jpg')
-        },
-        {
-          title: '专注芦荟二十年，荟宝为什么能节节攀高？专注芦荟二十年，荟宝为什么能节节攀高？',
-          desc:
-            '芦荟护肤的概念早已深入人心，市场上的芦荟品牌也是琳琅满目，而在芦荟领域深耕二十年的荟宝至今仍创新不断，继推出3X芦荟系列后，又构建了单品牌店商业新体系。荟宝为什么能持续为芦荟赋能？',
-          createTime: '2018-08-07 00:00:00',
-          link: '/target01',
-          coverUrl: require('@/assets/images/others/3.jpg')
-        }
-      ]
+      // 输入框
+      keyword0: '',
+      list: [],
+      limit: 8,
+      current_page: 1,
+      total_page: 0,
+      total: 0
     };
   },
   methods: {
     // 搜索
     searchHandle() {
-      if (!this.keyword) {
-        return false;
+      if (this.$nullTest(this.keyword)) {
+        return this.$errorToast('请输入搜索关键字');
       }
       this.$router.push({
         query: {
-          keyword: this.keyword
-        },
-        path: '/search'
+          keyword: this.keyword0,
+          page: 1
+        }
+        // path: '/search'
+      });
+    },
+    handleCurrentChange(page) {
+      let query = JSON.parse(JSON.stringify(this.$route.query));
+      query.page = page || 1;
+      this.$router.push({
+        query: query
       });
     }
   }

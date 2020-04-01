@@ -1,4 +1,4 @@
-# qy29
+# qy30-pc
 
 > My gnarly Nuxt.js project
 

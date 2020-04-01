@@ -1,7 +1,7 @@
 <template>
-  <div class="procedure-page">
+  <div class="apply-page">
     <v-sidebar></v-sidebar>
-    <main class="procedure-main">
+    <main class="apply-main">
       <div class="main-banner common-banner">
         <div class="banner-title-box">
           <h2 class="tit-cn">申请办法</h2>
@@ -9,9 +9,7 @@
         </div>
       </div>
       <!-- 富文本 -->
-      <div class="procedure-wrapper edit_textBox">
-          <img class="img" src="@/assets/images/others/Applicationprocedure2.jpg" alt="">
-      </div>
+      <div v-html="detail || '暂无内容'" class="apply-wrapper edit_textBox"></div>
     </main>
   </div>
 </template>
@@ -19,16 +17,6 @@
 <script>
 import URL from '@/plugins/url.js';
 export default {
-  // default模板
-  // layout: function(context) {
-  //   return 'default-demo';
-  // },
-  // 参数校验（失败直接跳转至404页面）
-  // validate({ params, route }) {
-  //   // 必须是number类型
-  //   return /^\d+$/.test(params.id);
-  // },
-  watchQuery:true,
   components: {
     vSidebar(resolve) {
       require(['@/components/vSidebar'], resolve);
@@ -51,30 +39,31 @@ export default {
       ]
     };
   },
-  async asyncData({ store, params,query, route, app }) {
-    let SEOInfo = null;
-    await app.$axios
-      .get(URL.getSEOInfo, {
+  async asyncData({ store, params, query, route, app }) {
+    let [res01, res02] = await Promise.all([
+      app.$axios.get(URL.getCustomArticle, {
         params: {
-          name: '/'
+          sign: 'apply'
+        }
+      }),
+      app.$axios.get(URL.getSEOInfo, {
+        params: {
+          type: 'custom',
+          client: 1,
+          module_id: 'apply'
         }
       })
-      .then(res => {
-        SEOInfo = res.data;
-        console.log('async请求成功');
-      })
-      .catch(err => {
-        console.log(err);
-        console.log('async请求失败');
-      });
+    ]);
     return {
-      SEOInfo: SEOInfo,
+      detail: res01.data.content,
+      SEOInfo: res02.data
     };
   },
   created() {},
   data() {
     return {
-      SEOInfo: {}
+      SEOInfo: {},
+      detail: ''
     };
   }
 };

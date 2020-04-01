@@ -7,13 +7,13 @@ export default function(app) {
 
     // 拦截器1 推荐
     axios.interceptors.request.use(req => {
-        console.log('request拦截');
+        // console.log('request拦截');
         return req
     }, err => {
         return Promise.reject(err);
     })
     axios.interceptors.response.use(res => {
-        console.log('response拦截');
+        // console.log('response拦截');
         if (res.data.code != 0) {
             return Promise.reject(res);
         }

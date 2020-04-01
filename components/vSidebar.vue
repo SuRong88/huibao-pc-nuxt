@@ -1,7 +1,7 @@
 <template>
   <div class="v-sidebar">
     <!-- 目录按钮 -->
-    <div class="side-menu" @click="toggleSide">
+    <div class="sidebar-menu" @click="toggleSide">
       <a href="javascript:void(0);" class="menu-trigger" :class="{ active: isActived }">
         <div></div>
         <div></div>
@@ -11,21 +11,30 @@
       <span class="text">{{ isActived ? '返回' : '目录' }}</span>
     </div>
     <!-- logo -->
-    <h1 class="side-logo">
-      <!-- 待修改 href -->
-      <nuxt-link :style="'background-image: url(' + webInfo.website_logo_top + ');'" to="/" class="logo">{{ webInfo.website_name }}</nuxt-link>
+    <h1 class="sidebar-logo">
+      <a
+        :href="webInfo.website_domain"
+        :style="'background-image: url(' + webInfo.website_logo_top + ');'"
+        class="logo"
+      >{{ webInfo.website_name }}</a>
     </h1>
     <!-- 搜索 -->
-    <div class="side-search">
-      <input @keyup.enter="searchHandle" v-model="keyword" class="search" placeholder="搜索" type="text" />
-      <img @click="searchHandle" class="search-icon" src="@/assets/images/side/search.png" alt="" />
+    <div class="sidebar-search">
+      <input
+        @keyup.enter="searchHandle"
+        v-model="keyword"
+        class="search"
+        placeholder="搜索"
+        type="text"
+      />
+      <img @click="searchHandle" class="search-icon" src="@/assets/images/side/search.png" alt />
     </div>
     <!-- 官方联系 -->
-    <div class="side-contact">
+    <div class="sidebar-contact">
       <div class="wechat">
-        <img class="qrcode" :src="webInfo.website_qrcode" alt="" />
+        <img class="qrcode" :src="webInfo.qrcode_pc" alt />
         <button class="btn-wechat flex flex-ver flex-align-center">
-          <img class="wechat-icon" src="@/assets/images/side/wechat.png" alt="" />
+          <img class="wechat-icon" src="@/assets/images/side/wechat.png" alt />
           <span>官方微信</span>
         </button>
       </div>
@@ -36,120 +45,76 @@
       </p>
     </div>
     <!-- 导航栏 -->
-    <div class="side-nav" :class="{ open: isActived }">
-      <ul class="nav-menu" v-if="navList.length">
-        <li v-for="(item, index) in navList" class="nav-item active">
-          <span>{{ item.name }}</span>
-          <ol v-if="item.children.length" class="sub-nav-menu">
-            <li v-for="(subItem, subIndex) in item.children" class="sub-nav-item">{{ subItem.name }}</li>
-          </ol>
-        </li>
+    <div class="sidebar-nav" :class="{ open: isActived }">
+      <ul class="nav-menu" v-if="navList && navList.length > 0">
+        <template v-for="(item, index) in navList">
+          <!-- 1.无子级 -->
+          <li
+            v-if="item.children.length <= 0"
+            @click="navToggle(index, -1, item.type * 1, item.value, item.open * 1)"
+            class="nav-item"
+            :class="{ active: index == currentIndex }"
+          >
+            <span>{{ item.name }}</span>
+          </li>
+          <!-- 2.有子级 -->
+          <li
+            v-else
+            @click="item.show = !item.show"
+            class="nav-item"
+            :class="{ active: item.show || index == currentIndex }"
+          >
+            <span>{{ item.name }}</span>
+            <ol @click.stop="" v-show="item.show || index == currentIndex" class="sub-nav-menu">
+              <li
+                v-for="(subItem, subIndex) in item.children"
+                class="sub-nav-item"
+                :class="{ active: index == currentIndex && subIndex == currentSubIndex }"
+                @click="navToggle(index, subIndex, subItem.type * 1, subItem.value, subItem.open * 1)"
+              >{{ subItem.name }}</li>
+            </ol>
+          </li>
+        </template>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
+import URL from "../plugins/url.js";
 export default {
-  name: 'vSidebar',
-  created() {},
+  name: "vSidebar",
+  created() {
+    let that = this;
+    this.$axios
+      .get(URL.getNavList, {
+        params: {
+          client: 1
+        }
+      })
+      .then(res => {
+        let length = res.data.header.length;
+        for (let i = 0; i < length; i++) {
+          if (res.data.header[i].children.length > 0) {
+            res.data.header[i].show = false;
+          }
+        }
+        that.navList = res.data.header;
+      });
+
+    if (process.client) {
+      this.isActived = sessionStorage.getItem("isActived") || false;
+      this.currentIndex = sessionStorage.getItem("currentIndex") || -1;
+      this.currentSubIndex = sessionStorage.getItem("currentSubIndex") || -1;
+    }
+  },
   data() {
     return {
       isActived: false,
-      navList: [
-        {
-          id: 94,
-          type: '2',
-          open: '1',
-          name: '首 页',
-          value: '\/',
-          template: 0,
-          children: []
-        },
-        {
-          id: 95,
-          type: '2',
-          open: '1',
-          name: '关于荟宝',
-          value: '\/products',
-          template: 0,
-          children: [
-            {
-              id: 95,
-              type: '2',
-              open: '1',
-              name: '品牌故事',
-              value: '/about01',
-              template: 0,
-              children: []
-            },
-            {
-              id: 95,
-              type: '2',
-              open: '1',
-              name: '荟宝文化',
-              value: '/about02',
-              template: 0,
-              children: []
-            },
-            {
-              id: 95,
-              type: '2',
-              open: '1',
-              name: '发展历程',
-              value: '/about03',
-              template: 0,
-              children: []
-            }
-          ]
-        },
-        {
-          id: 97,
-          type: '2',
-          open: '1',
-          name: '热销榜单',
-          value: '\/solutions',
-          template: 0,
-          children: []
-        },
-        {
-          id: 98,
-          type: '2',
-          open: '1',
-          name: '芦荟多肽系列',
-          value: '\/cases',
-          template: 0,
-          children: []
-        },
-        {
-          id: 99,
-          type: '2',
-          open: '1',
-          name: '荟宝芦荟系列',
-          value: '\/about\/profile',
-          template: 0,
-          children: []
-        },
-        {
-          id: 99,
-          type: '2',
-          open: '1',
-          name: '合作经营',
-          value: '\/about\/profile',
-          template: 0,
-          children: []
-        },
-        {
-          id: 99,
-          type: '2',
-          open: '1',
-          name: '荟宝资讯',
-          value: '\/about\/profile',
-          template: 0,
-          children: []
-        }
-      ],
-      keyword: ''
+      navList: [],
+      keyword: "",
+      currentIndex: -1,
+      currentSubIndex: -1
     };
   },
   computed: {
@@ -159,20 +124,98 @@ export default {
   },
   watch: {},
   methods: {
-    // 侧边栏切换
+    // 侧边栏toggle
     toggleSide() {
       this.isActived = !this.isActived;
     },
+    // 导航栏跳转
+    navToggle(index, subIndex, type, value, open) {
+      console.log(index, subIndex, type, value, open);
+      sessionStorage.setItem("currentIndex", index);
+      sessionStorage.setItem("currentSubIndex", subIndex);
+      sessionStorage.setItem("isActived", true);
+      this.navList[index].show = true;
+      this.currentIndex = index;
+      this.currentSubIndex = subIndex;
+      switch (type) {
+        // case 0: //不跳转
+        //   console.log('不跳转');
+        //   break;
+        case 1: //首页或栏目
+          switch (value * 1) {
+            case 0: //首页
+              switch (open) {
+                case 0: //新页面打开
+                  window.open(this.webInfo.website_domain);
+                  break;
+                case 1: //原页面打开
+                  this.$router.push({
+                    path: "/"
+                  });
+                  break;
+              }
+              break;
+            default:
+              //栏目
+              switch (open) {
+                case 0: //新页面打开
+                  window.open("/news/" + value);
+                  break;
+                case 1: //原页面打开
+                  this.$router.push({
+                    path: "/news/" + value
+                  });
+                  break;
+              }
+              break;
+          }
+          break;
+        case 2: //自定义页面
+          switch (open) {
+            case 0: //新页面打开
+              window.open(value);
+              break;
+            case 1: //原页面打开
+              this.$router.push({
+                path: "/" + value
+              });
+              break;
+          }
+          break;
+        case 3: //文章
+          switch (open) {
+            case 0: //新页面打开
+              window.open("/newsDetail/" + value);
+              break;
+            case 1: //原页面打开
+              this.$router.push({
+                path: "/newsDetail/" + value
+              });
+              break;
+          }
+          break;
+        case 4: //外链
+          switch (open) {
+            case 0: //新页面打开
+              window.open(value);
+              break;
+            case 1: //原页面打开
+              window.location.href = value;
+              break;
+          }
+          break;
+      }
+    },
     // 侧边栏搜索
     searchHandle() {
-      if (!this.keyword) {
-        return false;
+      if (this.$nullTest(this.keyword)) {
+        return this.$errorToast("请输入搜索内容");
       }
       this.$router.push({
         query: {
           keyword: this.keyword
         },
-        path: '/search'
+        path: "/search"
       });
     }
   }
@@ -191,7 +234,7 @@ export default {
   padding: 40px 35px;
   background-color: #fff;
   border-right: 1px solid #b7b7b7;
-  .side-nav {
+  .sidebar-nav {
     position: fixed;
     left: -280px;
     top: 0;
@@ -199,7 +242,7 @@ export default {
     width: 280px;
     height: 100vh;
     overflow-y: auto;
-    padding: 168px 20px 20px 55px;
+    padding: 168px 20px 100px 55px;
     // padding-left: 55px;
     // padding-right: 20px;
     background: rgba(238, 238, 238, 1);
@@ -256,7 +299,7 @@ export default {
       }
     }
   }
-  .side-menu {
+  .sidebar-menu {
     width: 130px;
     margin: 0 auto 108px;
     position: relative;
@@ -320,7 +363,7 @@ export default {
       color: @color;
     }
   }
-  .side-logo {
+  .sidebar-logo {
     margin-bottom: 42px;
     .logo {
       display: block;
@@ -331,7 +374,7 @@ export default {
       background: center center/cover no-repeat;
     }
   }
-  .side-search {
+  .sidebar-search {
     margin-bottom: 140px;
     border-bottom: 1px solid @color;
     position: relative;
@@ -370,7 +413,7 @@ export default {
     }
   }
 
-  .side-contact {
+  .sidebar-contact {
     position: absolute;
     left: 50%;
     // bottom: 182px;

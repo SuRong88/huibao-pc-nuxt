@@ -55,7 +55,8 @@ export default {
     '@/plugins/layout.js',
     '@/plugins/request.js',
     '@/plugins/route.js',
-    '@/plugins/format.js'
+    '@/plugins/format.js',
+    '@/plugins/formCheck.js'
   ],
   /*
    ** Nuxt.js dev-modules
@@ -79,7 +80,7 @@ export default {
   // 代理的配置项
   proxy: {
     '/api': {
-      target: 'http://www.techviewinfo.com/api',
+      target: 'http://qy30.mrxdtech.com/api',
       pathRewrite: {
         '^/api': '/'
       }

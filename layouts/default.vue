@@ -14,7 +14,7 @@ export default {
       link: [
         {
           rel: 'shortcut icon',
-          // type: 'image/x-icon',
+          type: 'image/x-icon',
           href: this.$store.state.webInfo.website_icon
         }
       ]
@@ -22,9 +22,10 @@ export default {
   },
 
   created() {
-    // this.$axios.get(URL.getWebInfo).then(res => {
-    //   this.$store.commit('SET_WEBINFO', res.data);
-    // });
+    this.$axios.get(URL.getWebInfo).then(res => {
+      console.log(res.data.info);
+      this.$store.commit('SET_WEBINFO', res.data.info);
+    });
   },
 
   computed: {},

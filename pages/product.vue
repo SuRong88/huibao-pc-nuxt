@@ -2,48 +2,22 @@
   <div class="product-page">
     <v-sidebar></v-sidebar>
     <main class="product-main">
-      <div class="product-box">
-        <img class="product-banner" src="@/assets/images/others/prouduct.jpg" alt="" />
+      <div v-for="(item, index) in list" class="product-box">
+        <img class="product-banner" :src="item.bg_img" alt="" />
         <div class="intro-box">
-          <img class="intro-tag" src="@/assets/images/culture/tag.png" alt="" />
-          <p class="intro-tit">双重抗初老能量 逆转时光焕现美</p>
-          <p class="intro-txt">
-            利用先进的工艺提取技术，让芦荟的美容护理功效以更温和、更有效的形式完美呈现，舒缓保湿，有效缓解换季、压力、孕期等肌肤不适状况，打败疲惫和脆弱状态，日复一日，肌肤焕发健康光采！
-          </p>
+          <img class="intro-tag" :src="item.tag_img" alt="" />
+          <p class="intro-tit">{{ item.propaganda }}</p>
+          <p class="intro-txt">{{ item.profiles }}</p>
         </div>
         <div class="mul-box">
           <ul class="product-list flex">
-            <li class="product-item">
-              <div class="item-img-box">
-                
-              <img class="item-img" src="@/assets/images/others/a.jpg" alt="" />
-              </div>
-              <p class="item-txt">荟宝芦荟多肽提拉洁面乳</p>
-            </li>
-            <li class="product-item">
-              <div class="item-img-box">
-                
-              <img class="item-img" src="@/assets/images/others/b.jpg" alt="" />
-              </div>
-              <p class="item-txt">荟宝芦荟多肽提拉眼部精华液</p>
-            </li>
-            <li class="product-item">
-              <div class="item-img-box">
-                
-              <img class="item-img" src="@/assets/images/others/c.jpg" alt="" />
-              </div>
-              <p class="item-txt">荟宝芦荟多肽提拉洁面乳</p>
-            </li>
-            <li class="product-item">
-              <div class="item-img-box">
-                
-              <img class="item-img" src="@/assets/images/others/d.jpg" alt="" />
-              </div>
-              <p class="item-txt">荟宝芦荟多肽提拉洁面乳</p>
+            <li v-for="(subItem, subIndex) in item.product_data" class="product-item">
+              <div class="item-img-box"><img class="item-img" :src="subItem.product_img" alt="" /></div>
+              <p class="item-txt">{{ subItem.product_title }}</p>
             </li>
           </ul>
           <img class="mul-img" src="@/assets/images/others/MyAloneGarden.png" alt="" />
-          <div class="view-more">
+          <a :href="item.link_url" target="_blank" class="view-more">
             <div id="wrap" style="width: 77px;height: 77px;">
               <svg viewBox="0 0 100 100">
                 <path d="M 50 50 m -40 0 a 40 40 0 1 0 80 0  a 40 40 0 1 0 -80 0" fill="none" stroke="#999" stroke-width="2">></path>
@@ -59,12 +33,12 @@
               </svg>
               <p class="txt">查看更多</p>
             </div>
-          </div>
+          </a>
         </div>
       </div>
 
-      <!-- 2 -->
-      <div class="product-box product-box-type2">
+      <!-- 2 绿色主题 -->
+      <div v-if="false" class="product-box product-box-type2">
         <img class="product-banner" src="@/assets/images/others/prouduct2.jpg" alt="" />
         <div class="intro-box">
           <img class="intro-tag" src="@/assets/images/culture/tag.png" alt="" />
@@ -76,29 +50,19 @@
         <div class="mul-box">
           <ul class="product-list flex">
             <li class="product-item">
-              <div class="item-img-box">
-                
-              <img class="item-img" src="@/assets/images/others/e.jpg" alt="" />
-              </div>
+              <div class="item-img-box"><img class="item-img" src="@/assets/images/others/e.jpg" alt="" /></div>
               <p class="item-txt">荟宝芦荟多肽提拉洁面乳</p>
             </li>
             <li class="product-item">
-              <div class="item-img-box">
-                
-              <img class="item-img" src="@/assets/images/others/f.jpg" alt="" />
-              </div>
+              <div class="item-img-box"><img class="item-img" src="@/assets/images/others/f.jpg" alt="" /></div>
               <p class="item-txt">荟宝芦荟多肽提拉眼部精华液</p>
             </li>
             <li class="product-item">
-              <div class="item-img-box">
-              <img class="item-img" src="@/assets/images/others/g.jpg" alt="" />
-              </div>
+              <div class="item-img-box"><img class="item-img" src="@/assets/images/others/g.jpg" alt="" /></div>
               <p class="item-txt">荟宝芦荟多肽提拉洁面乳</p>
             </li>
             <li class="product-item">
-              <div class="item-img-box">
-              <img class="item-img" src="@/assets/images/others/h.jpg" alt="" />
-              </div>
+              <div class="item-img-box"><img class="item-img" src="@/assets/images/others/h.jpg" alt="" /></div>
               <p class="item-txt">荟宝芦荟多肽提拉洁面乳</p>
             </li>
           </ul>
@@ -129,16 +93,6 @@
 <script>
 import URL from '@/plugins/url.js';
 export default {
-  // default模板
-  // layout: function(context) {
-  //   return 'default-demo';
-  // },
-  // 参数校验（失败直接跳转至404页面）
-  // validate({ params, route }) {
-  //   // 必须是number类型
-  //   return /^\d+$/.test(params.id);
-  // },
-  watchQuery: true,
   components: {
     vSidebar(resolve) {
       require(['@/components/vSidebar'], resolve);
@@ -162,32 +116,27 @@ export default {
     };
   },
   async asyncData({ store, params, query, route, app }) {
-    let SEOInfo = null;
-    await app.$axios
-      .get(URL.getSEOInfo, {
+    let [res01, res02] = await Promise.all([
+      app.$axios.get(URL.getIntroduceList),
+      app.$axios.get(URL.getSEOInfo, {
         params: {
-          name: '/'
+          type: 'custom',
+          client: 1,
+          module_id: 'product'
         }
       })
-      .then(res => {
-        SEOInfo = res.data;
-        console.log('async请求成功');
-      })
-      .catch(err => {
-        console.log(err);
-        console.log('async请求失败');
-      });
+    ]);
     return {
-      SEOInfo: SEOInfo
+      list: res01.data,
+      SEOInfo: res02.data
     };
   },
-  created() {},
   data() {
     return {
-      SEOInfo: {}
+      SEOInfo: {},
+      list: []
     };
-  },
-  computed: {}
+  }
 };
 </script>
 

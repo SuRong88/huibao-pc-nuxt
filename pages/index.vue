@@ -5,7 +5,10 @@
       <no-ssr>
         <swiper v-if="bannerList.length" class="index-banner" :options="swiperOption" ref="mySwiper">
           <swiper-slide v-for="item in bannerList" class="swiper-item">
-            <nuxt-link tag="div" class="swiper-item-inner" :style="'background-image: url(' + item.coverUrl + ');'" :to="'/'" :title="item.title"></nuxt-link>
+            <!-- 1外链 -->
+            <a v-if="item.link_type == 1" target="_blank" class="swiper-item-inner" :style="'background-image: url(' + item.img + ');'" :href="item.link" :title="item.name"></a>
+            <!-- 2内链 -->
+            <nuxt-link v-else class="swiper-item-inner" :style="'background-image: url(' + item.img + ');'" :to="item.link" :title="item.name"></nuxt-link>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
@@ -21,15 +24,6 @@
 <script>
 import URL from '@/plugins/url.js';
 export default {
-  // default模板
-  // layout: function(context) {
-  //   return 'default-demo';
-  // },
-  // 参数校验（失败直接跳转至404页面）
-  // validate({ params, route }) {
-  //   // 必须是number类型
-  //   return /^\d+$/.test(params.id);
-  // },
   components: {
     vSidebar(resolve) {
       require(['@/components/vSidebar'], resolve);
@@ -53,23 +47,23 @@ export default {
     };
   },
   async asyncData({ store, params, route, app }) {
-    let SEOInfo = null;
-    await app.$axios
-      .get(URL.getSEOInfo, {
+    let [res01, res02] = await Promise.all([
+      app.$axios.get(URL.getBannerList, {
         params: {
-          name: '/'
+          client: 1
+        }
+      }),
+      app.$axios.get(URL.getSEOInfo, {
+        params: {
+          type: 'custom',
+          client: 1,
+          module_id: '/'
         }
       })
-      .then(res => {
-        SEOInfo = res.data;
-        console.log('async请求成功');
-      })
-      .catch(err => {
-        console.log(err);
-        console.log('async请求失败');
-      });
+    ]);
     return {
-      SEOInfo: SEOInfo
+      bannerList: res01.data,
+      SEOInfo: res02.data
     };
   },
   created() {},
@@ -82,7 +76,6 @@ export default {
         speed: 1000,
         direction: 'vertical',
         mousewheelControl: true,
-        // 接受鼠标“拖动”控制
         simulateTouch: false,
         pagination: '.swiper-pagination',
         paginationClickable: true,
@@ -92,29 +85,8 @@ export default {
           console.log(swiper.realIndex);
           this.swiperIndex = swiper.realIndex;
         }
-        // onTransitionEnd: swiper => {
-        //   console.log(swiper.realIndex);
-        //   console.log(this);
-        //   this.swiperIndex = swiper.realIndex;
-        // }
       },
-      bannerList: [
-        {
-          title: '轮播title1',
-          link: '/target01',
-          coverUrl: require('@/assets/images/index/banner.jpg')
-        },
-        {
-          title: '轮播title2',
-          link: '/target02',
-          coverUrl: require('@/assets/images/index/banner.jpg')
-        },
-        {
-          title: '轮播title3',
-          link: '/target03',
-          coverUrl: require('@/assets/images/index/banner.jpg')
-        }
-      ]
+      bannerList: []
     };
   }
 };

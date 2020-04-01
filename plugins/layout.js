@@ -139,21 +139,4 @@ export default ({
 
             }
         });
-        
-        // 导航栏fix,滚动指定distance之后显示背景颜色
-        inject('fixHeader', function(page, distance) {
-            window.onscroll = function() {
-                if (document.documentElement.scrollTop && document.documentElement.scrollTop >= distance) {
-                    return (page.show = true);
-                } else if (window.pageYOffset && window.pageYOffset >= distance) {
-                    return (page.show = true);
-                } else if (document.body.scrollTop && document.body.scrollTop >= distance) {
-                    return (page.show = true);
-                } else {
-                    return (page.show = false);
-                }
-            };
-            window.onscroll();
-        })
-
 }
