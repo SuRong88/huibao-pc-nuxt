@@ -380,7 +380,7 @@ export default {
     position: relative;
     .search {
       border: none;
-      line-height: 52px;
+      height: 52px;
       padding: 0 25px 0 5px;
       font-size: 20px;
       font-family: PingFang SC;
