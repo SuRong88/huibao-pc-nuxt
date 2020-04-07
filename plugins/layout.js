@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import moment from 'moment';
 let loading = null;
 
 export default ({
@@ -102,7 +103,7 @@ export default ({
             }
 
         });
-        
+
         // 基础接口
         /*
          ** options: 接口数组
@@ -128,7 +129,7 @@ export default ({
                 this.$errorToast('系统出错，请稍后再试');
             })
         });
-        
+
         // 状态码管理
         inject('errorCode', function(res, cb_err) {
             switch (parseInt(res.code)) {
@@ -139,4 +140,9 @@ export default ({
 
             }
         });
+
+       // 格式化日期
+       inject('formatDate', function(dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
+         return moment(dataStr).format(pattern)
+       })
 }

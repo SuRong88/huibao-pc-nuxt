@@ -26,7 +26,7 @@
             </div>
           </nuxt-link>
         </ul>
-        <button v-show="!isLastPage" @click="viewMore" class="view-more">查看更多</button>
+        <button v-show="!isLastPage && totalPage!=0" @click="viewMore" class="view-more">查看更多</button>
       </div>
     </main>
   </div>
@@ -60,7 +60,7 @@ export default {
   },
   async asyncData({ store, params, query, route, app }) {
     // 文章分类id
-    let type = (params.type == '-1' || !params.type) ? -1 : params.type;
+    let type = (params.type == 'all' || !params.type) ? -1 : params.type;
     console.log('type' + type);
     let [res01, res02, res03] = await Promise.all([
       app.$axios.get(URL.getArticleType),
@@ -86,11 +86,13 @@ export default {
       template: 'article_default'
     });
     let pagination = res02.data.pagination;
+    console.log(res02.data);
     return {
       type: params.type == -1 ? 'all' : params.type,
       typeList: res01.data,
       list: res02.data.list,
       currentPage: pagination.current,
+      totalPage: pagination.total_page,
       isLastPage: pagination.current == pagination.total_page,
       SEOInfo: res03.data
     };
@@ -103,6 +105,7 @@ export default {
       // 类型
       type: 'all',
       currentPage: 1,
+      totalPage: 0,
       isLastPage: false,
       //
       list: []
@@ -119,7 +122,7 @@ export default {
     },
     // 查看更多
     viewMore() {
-      let type = (this.$route.params.type == '-1' || !this.$route.params.type) ? -1 : this.$route.params.type;
+      let type = (this.$route.params.type == 'all' || !this.$route.params.type) ? -1 : this.$route.params.type;
       let that = this;
       this.$axios
         .get(URL.getArticleList, {

@@ -127,18 +127,19 @@ export default {
         speed: 800,
         direction: 'vertical',
         // mousewheelControl: true,
-        simulateTouch: true,
+        simulateTouch: false,
         pagination: '.swiper-pagination',
         paginationClickable: true,
         paginationBulletRender: (swiper, index, className) => {
-          return '<li class="' + className + '">' + that.years[index] + ' ~</li>';
+          return '<li class="' + className + '">' + that.$formatDate(this.newsList[index].date,'YYYY') + ' ~</li>';
         },
         effect: 'coverflow',
         slidesPerView: 3,
         spaceBetween: 5,
         centeredSlides: true,
         slidesPerView: 3,
-        // loopFillGroupWithBlank: true,
+        initialSlide:1,
+        loopFillGroupWithBlank: true,
         coverflow: {
           rotate: 0,
           stretch: 0,
@@ -148,8 +149,12 @@ export default {
         },
         autoplayDisableOnInteraction: true
       },
-      years: [2001, 2002, 2003, 2004, 2005, 2006, 2007],
       newsList: [
+        {
+          title: '占位',
+          date: '1970-12-01 15:01:22',
+          coverUrl: require('@/assets/images/culture/6.jpg')
+        },
         {
           title: '荟宝三大系列108单品亮相全国。',
           date: '2001-12-01 15:01:22',
@@ -172,14 +177,24 @@ export default {
         },
         {
           title: '荟宝三大系列108单品亮相全国。',
-          date: '2005-12-01 15:01:22'
-          // coverUrl: require('@/assets/images/others/4.jpg')
+          date: '2005-12-01 15:01:22',
+          coverUrl: require('@/assets/images/others/4.jpg')
         },
         {
           title: '荟宝三大系列108单品亮相全国。',
           date: '2006-12-01 15:01:22',
           coverUrl: require('@/assets/images/others/5.jpg')
-        }
+        },
+        {
+          title: '荟宝三大系列108单品亮相全国。',
+          date: '2006-12-01 15:01:22',
+          coverUrl: require('@/assets/images/others/5.jpg')
+        },
+        // {
+        //   title: '占位',
+        //   date: '2006-12-01 15:01:22',
+        //   coverUrl: require('@/assets/images/others/5.jpg')
+        // }
       ]
     };
   },
@@ -187,4 +202,5 @@ export default {
 };
 </script>
 
-<style lang="less"></style>
+<style lang="less">
+</style>

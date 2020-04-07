@@ -83,7 +83,8 @@ export default {
         params: {
           keyword: query.keyword,
           page: query.page || 1,
-          rownum: 8
+          rownum: 6,
+          client: 1
         }
       }),
       //全站通用seo
@@ -91,7 +92,7 @@ export default {
         params: {
           type: 0,
           client: 1,
-          module_id: 0
+          module_id: 0,
         }
       })
     ]);
@@ -120,7 +121,7 @@ export default {
       // 输入框
       keyword0: '',
       list: [],
-      limit: 8,
+      limit: 6,
       current_page: 1,
       total_page: 0,
       total: 0
@@ -129,7 +130,7 @@ export default {
   methods: {
     // 搜索
     searchHandle() {
-      if (this.$nullTest(this.keyword)) {
+      if (this.$nullTest(this.keyword0)) {
         return this.$errorToast('请输入搜索关键字');
       }
       this.$router.push({

@@ -714,6 +714,20 @@ input::-moz-placeholder {
     color: @color;
   }
 }
+
+@keyframes t2 {
+  0% {
+    color: #999;
+  }
+
+  60% {
+    color: #999;
+  }
+
+  100% {
+    color: @color;
+  }
+}
 /*****************************
 首页
 *****************************/
@@ -732,7 +746,7 @@ input::-moz-placeholder {
       }
     }
     .swiper-pagination-bullets {
-      right: 28px;
+      right: 55px;
     }
     .swiper-pagination-bullet {
       opacity: 1;
@@ -769,7 +783,7 @@ input::-moz-placeholder {
     font-size: 18px;
     font-family: PingFang SC;
     font-weight: bold;
-    color: rgba(255, 255, 255, 1);
+    color: #e5e5e5;
     letter-spacing: 2px;
     .line {
       width: 2px;
@@ -787,7 +801,7 @@ input::-moz-placeholder {
         left: 1px;
         width: 100%;
         height: 100%;
-        background-color: #fff;
+        background-color: #e5e5e5;
         -webkit-animation: arrow 2.5s ease 0s infinite normal;
         animation: arrow 2.5s ease 0s infinite normal;
       }
@@ -796,12 +810,6 @@ input::-moz-placeholder {
       animation: t 2.5s ease 0s infinite normal;
     }
   }
-}
-
-/*****************************
-开始书写页面样式
-*****************************/
-.example-page {
 }
 /*****************************
 搜索页
@@ -1159,7 +1167,11 @@ input::-moz-placeholder {
     }
     .research {
       text-align: center;
-      padding-bottom: 195px;
+      // padding-bottom: 195px;
+      padding-bottom: 120px;
+      .swiper-container {
+        margin-left: 0;
+      }
     }
     .research-tit {
       padding: 88px 0 30px;
@@ -1184,6 +1196,7 @@ input::-moz-placeholder {
         .img {
           display: block;
           height: 234px;
+          margin-left: 30px;
         }
         &::after {
           content: '';
@@ -1199,6 +1212,7 @@ input::-moz-placeholder {
       }
       .screen-bottom {
         width: 530px;
+        height: 480px;
         padding-left: 30px;
         .b-tit {
           font-size: 18px;
@@ -1223,6 +1237,10 @@ input::-moz-placeholder {
         left: 520px;
         .img-box {
           height: 100%;
+          .border_rds(50%);
+          overflow: hidden;
+          background: center center/cover no-repeat;
+          .transition(all 0.8s);
           .img {
             width: 100%;
             height: 100%;
@@ -1239,6 +1257,7 @@ input::-moz-placeholder {
         }
         .btn-l,
         .btn-r {
+          cursor: pointer;
           vertical-align: top;
           width: 20px;
           height: 20px;
@@ -1364,7 +1383,8 @@ input::-moz-placeholder {
           .slide-bottom {
             min-height: 200px !important;
             border-left: 1px solid @color!important;
-            padding: 24px 40px 48px !important;
+            // padding: 24px 40px 48px !important;
+            padding: 24px 40px 35px !important;
           }
           .date {
             color: @color!important;
@@ -1398,6 +1418,9 @@ input::-moz-placeholder {
         font-family: PingFang SC;
         color: rgba(153, 153, 153, 1);
         margin-bottom: 28px;
+        &:first-child {
+          display: none;
+        }
         &:last-child {
           margin-bottom: 0;
         }
@@ -1416,19 +1439,25 @@ input::-moz-placeholder {
         padding-left: 16.5%;
         .box-l {
           width: 230px;
-          // height: 65;
-          background-color: pink;
         }
         .box-r {
           width: 590px;
-          height: 680px;
+          height: 700px;
         }
       }
       .news-swiper {
         .swiper-item {
+          &:nth-child(n + 3) {
+            padding-top: 20px;
+          }
+          &:first-child {
+            display: none;
+          }
+          &:last-child {
+            opacity: 0;
+          }
           .slide-top {
             display: inline-block;
-            // padding: 10px 0;
             line-height: 28px;
             width: 120px;
             text-align: right;
@@ -1614,8 +1643,8 @@ input::-moz-placeholder {
     background-image: url(../images/others/Applicationprocedure.jpg);
   }
   .apply-wrapper {
-    text-align: center;
-    padding: 67px 0 60px;
+    // text-align: center;
+    // padding: 67px 0 60px;
   }
 }
 /*****************************
@@ -1766,7 +1795,7 @@ input::-moz-placeholder {
     }
     .detail-bd {
       // padding: 0 16.7%;
-      padding: 0 12.5%;
+      padding: 5% 12.5%;
     }
   }
 }
@@ -1866,8 +1895,6 @@ input::-moz-placeholder {
     background-image: url(../images/others/Joininvestment.jpg);
   }
   .advantage-wrapper {
-    width: 774px;
-    margin: 0 auto;
     .img {
       width: 100%;
     }
@@ -1940,9 +1967,8 @@ input::-moz-placeholder {
       left: 1px;
       width: 100%;
       height: 100%;
-      background-color: #fff;
-      -webkit-animation: arrow 2.5s ease 0s infinite normal;
-      animation: arrow 2.5s ease 0s infinite normal;
+      background-color: #d2d2d2;
+      .animation(arrow 2.5s ease 0s infinite normal);
     }
   }
   .txt {
@@ -1950,6 +1976,6 @@ input::-moz-placeholder {
     font-size: 14px;
     font-family: PingFang SC;
     color: rgba(153, 153, 153, 1);
-    animation: t 2.5s ease 0s infinite normal;
+    .animation(t2 2.5s ease 0s infinite normal);
   }
 }

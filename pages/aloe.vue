@@ -70,7 +70,7 @@ export default {
     let [res01, res02] = await Promise.all([
       app.$axios.get(URL.getProductList, {
         params: {
-          type: 0,
+          type: 2,
           client: 1
         }
       }),

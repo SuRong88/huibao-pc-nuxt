@@ -5,10 +5,11 @@
       <no-ssr>
         <swiper v-if="bannerList.length" class="index-banner" :options="swiperOption" ref="mySwiper">
           <swiper-slide v-for="item in bannerList" class="swiper-item">
+            <a :target="item.open == 0 ? '_blank' : ''" class="swiper-item-inner" :style="'background-image: url(' + item.img + ');'" :href="item.link" :title="item.name"></a>
             <!-- 1外链 -->
-            <a v-if="item.link_type == 1" target="_blank" class="swiper-item-inner" :style="'background-image: url(' + item.img + ');'" :href="item.link" :title="item.name"></a>
+            <!-- <a v-if="item.link_type == 1" target="_blank" class="swiper-item-inner" :style="'background-image: url(' + item.img + ');'" :href="item.link" :title="item.name"></a> -->
             <!-- 2内链 -->
-            <nuxt-link v-else class="swiper-item-inner" :style="'background-image: url(' + item.img + ');'" :to="item.link" :title="item.name"></nuxt-link>
+            <!-- <nuxt-link v-else class="swiper-item-inner" :style="'background-image: url(' + item.img + ');'" :to="item.link" :title="item.name"></nuxt-link> -->
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>

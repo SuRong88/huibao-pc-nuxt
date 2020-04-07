@@ -4,7 +4,7 @@ const api = {
   getWebInfo: host + '/setting/', // 网站信息
   getBannerList: host + '/index/banner', //首页轮播
   getNavList: host + '/nav', // 网站导航
-  getIntroduceList: host + '/index/ProductPage', //产品介绍页
+  getProductList: host + '/index/ProductPage', //产品介绍页
   getSEOInfo: host + '/setting/seo', // 页面seo信息
   getCustomArticle: host + '/index/DetailPage', //详情页面（申请流程，荟宝优势）
 

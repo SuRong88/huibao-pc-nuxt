@@ -12,21 +12,11 @@
     </div>
     <!-- logo -->
     <h1 class="sidebar-logo">
-      <a
-        :href="webInfo.website_domain"
-        :style="'background-image: url(' + webInfo.website_logo_top + ');'"
-        class="logo"
-      >{{ webInfo.website_name }}</a>
+      <a :href="webInfo.website_domain" :style="'background-image: url(' + webInfo.website_logo_top + ');'" class="logo">{{ webInfo.website_name }}</a>
     </h1>
     <!-- 搜索 -->
     <div class="sidebar-search">
-      <input
-        @keyup.enter="searchHandle"
-        v-model="keyword"
-        class="search"
-        placeholder="搜索"
-        type="text"
-      />
+      <input @keyup.enter="searchHandle" v-model="keyword" class="search" placeholder="搜索" type="text" />
       <img @click="searchHandle" class="search-icon" src="@/assets/images/side/search.png" alt />
     </div>
     <!-- 官方联系 -->
@@ -49,21 +39,11 @@
       <ul class="nav-menu" v-if="navList && navList.length > 0">
         <template v-for="(item, index) in navList">
           <!-- 1.无子级 -->
-          <li
-            v-if="item.children.length <= 0"
-            @click="navToggle(index, -1, item.type * 1, item.value, item.open * 1)"
-            class="nav-item"
-            :class="{ active: index == currentIndex }"
-          >
+          <li v-if="item.children.length <= 0" @click="navToggle(index, -1, item.type * 1, item.value, item.open * 1)" class="nav-item" :class="{ active: index == currentIndex }">
             <span>{{ item.name }}</span>
           </li>
           <!-- 2.有子级 -->
-          <li
-            v-else
-            @click="item.show = !item.show"
-            class="nav-item"
-            :class="{ active: item.show || index == currentIndex }"
-          >
+          <li v-else @click="item.show = !item.show" class="nav-item" :class="{ active: index == currentIndex }">
             <span>{{ item.name }}</span>
             <ol @click.stop="" v-show="item.show || index == currentIndex" class="sub-nav-menu">
               <li
@@ -71,7 +51,9 @@
                 class="sub-nav-item"
                 :class="{ active: index == currentIndex && subIndex == currentSubIndex }"
                 @click="navToggle(index, subIndex, subItem.type * 1, subItem.value, subItem.open * 1)"
-              >{{ subItem.name }}</li>
+              >
+                {{ subItem.name }}
+              </li>
             </ol>
           </li>
         </template>
@@ -81,9 +63,9 @@
 </template>
 
 <script>
-import URL from "../plugins/url.js";
+import URL from '../plugins/url.js';
 export default {
-  name: "vSidebar",
+  name: 'vSidebar',
   created() {
     let that = this;
     this.$axios
@@ -93,26 +75,26 @@ export default {
         }
       })
       .then(res => {
-        let length = res.data.header.length;
-        for (let i = 0; i < length; i++) {
-          if (res.data.header[i].children.length > 0) {
-            res.data.header[i].show = false;
+        let navList = res.data.header;
+        for (let i = 0, length = navList.length; i < length; i++) {
+          if (navList[i].children.length > 0) {
+            navList[i].show = false;
           }
         }
-        that.navList = res.data.header;
+        that.navList = navList;
       });
 
     if (process.client) {
-      this.isActived = sessionStorage.getItem("isActived") || false;
-      this.currentIndex = sessionStorage.getItem("currentIndex") || -1;
-      this.currentSubIndex = sessionStorage.getItem("currentSubIndex") || -1;
+      this.isActived = sessionStorage.getItem('isActived') || false;
+      this.currentIndex = sessionStorage.getItem('currentIndex') || -1;
+      this.currentSubIndex = sessionStorage.getItem('currentSubIndex') || -1;
     }
   },
   data() {
     return {
       isActived: false,
       navList: [],
-      keyword: "",
+      keyword: '',
       currentIndex: -1,
       currentSubIndex: -1
     };
@@ -131,9 +113,9 @@ export default {
     // 导航栏跳转
     navToggle(index, subIndex, type, value, open) {
       console.log(index, subIndex, type, value, open);
-      sessionStorage.setItem("currentIndex", index);
-      sessionStorage.setItem("currentSubIndex", subIndex);
-      sessionStorage.setItem("isActived", true);
+      sessionStorage.setItem('currentIndex', index);
+      sessionStorage.setItem('currentSubIndex', subIndex);
+      sessionStorage.setItem('isActived', true);
       this.navList[index].show = true;
       this.currentIndex = index;
       this.currentSubIndex = subIndex;
@@ -150,20 +132,32 @@ export default {
                   break;
                 case 1: //原页面打开
                   this.$router.push({
-                    path: "/"
+                    path: '/'
+                  });
+                  break;
+              }
+              break;
+            case -1: //栏目-全部
+              switch (open) {
+                case 0: //新页面打开
+                  window.open('/news/all');
+                  break;
+                case 1: //原页面打开
+                  this.$router.push({
+                    path: '/news/all'
                   });
                   break;
               }
               break;
             default:
-              //栏目
+              //栏目-具体某一块
               switch (open) {
                 case 0: //新页面打开
-                  window.open("/news/" + value);
+                  window.open('/news/' + value);
                   break;
                 case 1: //原页面打开
                   this.$router.push({
-                    path: "/news/" + value
+                    path: '/news/' + value
                   });
                   break;
               }
@@ -177,7 +171,7 @@ export default {
               break;
             case 1: //原页面打开
               this.$router.push({
-                path: "/" + value
+                path: '/' + value
               });
               break;
           }
@@ -185,11 +179,11 @@ export default {
         case 3: //文章
           switch (open) {
             case 0: //新页面打开
-              window.open("/newsDetail/" + value);
+              window.open('/newsDetail/' + value);
               break;
             case 1: //原页面打开
               this.$router.push({
-                path: "/newsDetail/" + value
+                path: '/newsDetail/' + value
               });
               break;
           }
@@ -209,13 +203,13 @@ export default {
     // 侧边栏搜索
     searchHandle() {
       if (this.$nullTest(this.keyword)) {
-        return this.$errorToast("请输入搜索内容");
+        return this.$errorToast('请输入搜索内容');
       }
       this.$router.push({
         query: {
           keyword: this.keyword
         },
-        path: "/search"
+        path: '/search'
       });
     }
   }
@@ -223,7 +217,14 @@ export default {
 </script>
 
 <style lang="less">
+// less
 @color: rgba(45, 85, 51, 1);
+.text_one() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+// 样式
 .v-sidebar {
   position: fixed;
   left: 0;
@@ -243,8 +244,6 @@ export default {
     height: 100vh;
     overflow-y: auto;
     padding: 168px 20px 100px 55px;
-    // padding-left: 55px;
-    // padding-right: 20px;
     background: rgba(238, 238, 238, 1);
     opacity: 0;
     -webkit-transition: all 0.4s;
@@ -252,6 +251,23 @@ export default {
     -ms-transition: all 0.4s;
     -o-transition: all 0.4s;
     transition: all 0.4s;
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      width: 280px;
+      height: 100px;
+      position: fixed;
+      background: rgba(238, 238, 238, 1);
+      left: 0;
+      top: 0;
+      z-index: 2;
+    }
+    &::after {
+      top: unset;
+      bottom: 0;
+      height: 50px;
+    }
     &.open {
       left: 0;
       opacity: 1;
@@ -259,32 +275,69 @@ export default {
     .nav-menu {
       .nav-item {
         cursor: pointer;
-        min-width: 60px;
         font-size: 16px;
         font-family: PingFang SC;
         font-weight: bold;
         color: @color;
-        margin-bottom: 34px;
+        margin-bottom: 14px;
         text-align: justify;
         &:last-child {
           margin-bottom: 0;
         }
-        &:hover {
-          color: @color;
+        span {
+          .text_one();
+          min-width: 73px;
+          max-width: 100%;
+          padding: 13px 10px 13px 0;
+          line-height: 1;
+          display: inline-block;
+          position: relative;
+          text-align-last: justify;
+          &::after {
+            content: '';
+            display: block;
+            height: 1px;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            // background-color: transparent;
+            background-color: @color;
+            -webkit-transition: all 0.36s eases;
+            -moz-transition: all 0.36s ease;
+            -ms-transition: all 0.36s ease;
+            -o-transition: all 0.36s ease;
+            transition: all 0.36s ease;
+            -webkit-transform: scaleX(0);
+            -moz-transform: scaleX(0);
+            -ms-transform: scaleX(0);
+            -o-transform: scaleX(0);
+            transition: all 0.4s;
+            -webkit-transform-origin: 50% 50%;
+            -moz-transform-origin: 50% 50%;
+            -ms-transform-origin: 50% 50%;
+            -o-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+          }
         }
+        &:hover,
         &.active {
           span {
-            line-height: 1;
-            display: inline-block;
-            padding-right: 10px;
-            padding-bottom: 13px;
-            border-bottom: 1px solid @color;
+            &::after {
+              -webkit-transform: scaleX(1);
+              -moz-transform: scaleX(1);
+              -ms-transform: scaleX(1);
+              -o-transform: scaleX(1);
+              transform: scaleX(1);
+            }
           }
         }
       }
       .sub-nav-menu {
         padding-top: 20px;
         .sub-nav-item {
+          max-width: 100%;
+          .text_one();
           font-size: 12px;
           font-family: PingFang SC;
           color: rgba(153, 153, 153, 1);
@@ -292,6 +345,7 @@ export default {
           &:last-child {
             margin-bottom: 0;
           }
+          &:hover,
           &.active {
             color: @color;
           }
@@ -315,6 +369,10 @@ export default {
       & > div {
         display: inline-block;
         position: absolute;
+        -webkit-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        -ms-transition: all 0.4s;
+        -o-transition: all 0.4s;
         transition: all 0.4s;
         left: 0;
         width: 100%;
