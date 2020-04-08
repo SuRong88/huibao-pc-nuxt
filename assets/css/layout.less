@@ -685,6 +685,10 @@ input::-moz-placeholder {
 * {
   .bs_bb();
 }
+// 解决ie部分页面padding不起效 原因未知
+main {
+  display: block;
+}
 @keyframes arrow {
   0% {
     -webkit-transform: translate3d(-50%, 0, 0);

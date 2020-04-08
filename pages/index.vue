@@ -14,7 +14,8 @@
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </no-ssr>
-      <div v-show="swiperIndex < bannerList.length - 1" class="view-more">
+      <!-- <div v-show="swiperIndex < bannerList.length - 1" class="view-more"> -->
+      <div class="view-more">
         <div class="line"></div>
         <p class="txt">下滑查看更多</p>
       </div>
@@ -73,7 +74,7 @@ export default {
       SEOInfo: {},
       swiperIndex: 0,
       swiperOption: {
-        loop: false,
+        loop: true,
         speed: 1000,
         direction: 'vertical',
         mousewheelControl: true,

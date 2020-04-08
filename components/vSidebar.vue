@@ -257,9 +257,15 @@ export default {
       display: block;
       width: 280px;
       height: 100px;
-      position: fixed;
       background: rgba(238, 238, 238, 1);
-      left: 0;
+      opacity: 0;
+      -webkit-transition: all 0.4s;
+      -moz-transition: all 0.4s;
+      -ms-transition: all 0.4s;
+      -o-transition: all 0.4s;
+      transition: all 0.4s;
+      position: fixed;
+      left: -280px;
       top: 0;
       z-index: 2;
     }
@@ -271,6 +277,11 @@ export default {
     &.open {
       left: 0;
       opacity: 1;
+      &::before,
+      &::after{
+        left: 0;
+        opacity: 1;
+      }
     }
     .nav-menu {
       .nav-item {
