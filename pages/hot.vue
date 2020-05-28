@@ -1,40 +1,37 @@
 <template>
-  <div class="product-page">
+  <div class="hot-page">
     <v-sidebar></v-sidebar>
-    <main class="product-main">
-      <div v-for="(item, index) in list" class="product-box">
-        <img class="product-banner" :src="item.bg_img" alt="" />
-        <!-- 修改为隐藏 -->
-        <div v-show="false" class="intro-box">
-          <img class="intro-tag" :src="item.tag_img" alt="" />
-          <p class="intro-tit">{{ item.propaganda }}</p>
-          <p class="intro-txt">{{ item.profiles }}</p>
+    <main class="hot-main">
+      <div class="main-banner common-banner">
+        <div class="banner-title-box">
+          <h2 class="tit-cn">热销榜单</h2>
+          <h2 class="tit-en">Hot sale</h2>
         </div>
-        <div class="mul-box">
-          <ul class="product-list flex">
-            <li v-for="(subItem, subIndex) in item.product_data" class="product-item">
-              <div class="item-img-box"><img class="item-img" :src="subItem.product_img" alt="" /></div>
-              <p class="item-txt">{{ subItem.product_title }}</p>
-            </li>
-          </ul>
-          <img class="mul-img" src="@/assets/images/others/MyAloneGarden.png" alt="" />
-          <a :href="item.link_url" target="_blank" class="view-more">
-            <div id="wrap" style="width: 77px;height: 77px;">
-              <svg viewBox="0 0 100 100">
-                <path d="M 50 50 m -40 0 a 40 40 0 1 0 80 0  a 40 40 0 1 0 -80 0" fill="none" stroke="#999" stroke-width="2">></path>
-                <path
-                  d="M 50 50 m -40 0 a 40 40 0 1 0 80 0  a 40 40 0 1 0 -80 0"
-                  fill="none"
-                  stroke="#2C5432"
-                  stroke-linecap="round"
-                  class="my-svg-path"
-                  transform="rotate(180,50,50)"
-                  stroke-width="4"
-                ></path>
-              </svg>
-              <p class="txt">查看更多</p>
+      </div>
+      <div class="hot-wrapper">
+        <div class="hot-list clearfix">
+          <div v-for="(item, index) in list" class="hot-item fl">
+            <div class="item-hd"><img class="item-img" :src="item.cover_img" alt="" /></div>
+            <div class="item-bd">
+              <div class="item-tit">{{ item.title }}</div>
+              <div class="item-desc">{{ item.desc }}</div>
+              <a :href="item.buy_url" target="_blank" class="item-btn">立即购买</a>
             </div>
-          </a>
+          </div>
+        </div>
+        <!-- 分页器 -->
+        <div class="flex flex-center">
+          <el-pagination
+            v-if="list.length"
+            @current-change="handleCurrentChange"
+            id="pagination"
+            class="pagination"
+            background
+            layout="prev, pager, next"
+            :page-size="limit"
+            :current-page="current_page"
+            :page-count="total_page"
+          ></el-pagination>
         </div>
       </div>
     </main>
@@ -49,6 +46,7 @@ export default {
       require(['@/components/vSidebar'], resolve);
     }
   },
+  watchQuery: true,
   head() {
     return {
       title: this.SEOInfo.seo_title,
@@ -67,11 +65,12 @@ export default {
     };
   },
   async asyncData({ store, params, query, route, app }) {
+    console.log(query.page);
     let [res01, res02] = await Promise.all([
-      app.$axios.get(URL.getProductList, {
+      app.$axios.get(URL.getHotList, {
         params: {
-          type: 1,
-          client: 1
+          page: query.page || 1,
+          rownum: 8
         }
       }),
       app.$axios.get(URL.getSEOInfo, {
@@ -82,17 +81,35 @@ export default {
         }
       })
     ]);
-    console.log({ res01 });
+    let pagination = res01.data.pagination;
+    console.log(res01);
     return {
-      list: res01.data,
+      list: res01.data.list,
+      limit: pagination.rownum,
+      current_page: pagination.current,
+      total_page: pagination.total_page,
+      total: pagination.total,
       SEOInfo: res02.data
     };
   },
   data() {
     return {
       SEOInfo: {},
-      list: []
+      list: [],
+      limit: 8,
+      current_page: 1,
+      total_page: 0,
+      total: 0
     };
+  },
+  methods: {
+    handleCurrentChange(page) {
+      let query = JSON.parse(JSON.stringify(this.$route.query));
+      query.page = page || 1;
+      this.$router.push({
+        query: query
+      });
+    }
   }
 };
 </script>

@@ -75,7 +75,7 @@ export default {
       swiperIndex: 0,
       swiperOption: {
         loop: true,
-        speed: 1000,
+        speed: 1500,
         direction: 'vertical',
         mousewheelControl: true,
         simulateTouch: false,

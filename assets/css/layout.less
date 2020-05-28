@@ -935,15 +935,62 @@ main {
 .story-page {
   padding-left: 280px;
   .main-banner {
-    background-image: url(../images/culture/Ourstory.jpg);
+    background-image: url(../images/about/banner.jpg);
+  }
+  .tit-cn,
+  .tit-en {
+    color: @color!important;
+    &::after {
+      background-color: @color!important;
+    }
   }
   .common-view-more {
-    padding: 45px 0 116px;
+    padding: 45px 0 73px;
   }
   .story-wrapper {
     .img {
       width: 100%;
     }
+    .sec01 {
+    }
+    .sec02 {
+      text-align: center;
+      height: 247px;
+      background: rgba(95, 123, 48, 0.2);
+      font-size: 24px;
+      font-family: PingFang SC;
+      color: rgba(45, 85, 51, 1);
+      line-height: 2;
+    }
+    .sec03 {
+      width: 850px;
+      margin: 0 auto;
+      padding-top: 50px;
+      .sec03-item {
+        padding: 42px 0 65px;
+        text-align: center;
+        border-bottom: 1px solid #e5e5e5;
+        &:last-child {
+          padding-bottom: 70px;
+          border-bottom: none;
+        }
+      }
+      .item-img {
+        width: 100%;
+      }
+      .item-tit {
+        line-height: 1;
+        padding: 40px 0 22px;
+        font-size: 30px;
+        color: rgba(45, 85, 51, 1);
+      }
+      .item-txt {
+        color: rgba(153, 153, 153, 1);
+        font-size: 14px;
+        line-height: 30px;
+      }
+    }
+
     .inner-top {
       margin-bottom: 72px;
       .show-box {
@@ -1068,8 +1115,228 @@ main {
     background-image: url(../images/culture/aboutus.jpg);
   }
   .about-wrapper {
-    width: 1020px;
-    margin: 0 auto;
+    width: 100%;
+    .sec {
+      padding: 100px 0;
+      position: relative;
+      .sec-inner {
+        width: 955px;
+        margin: 0 auto;
+      }
+      .sec-tit {
+        text-align: center;
+        font-size: 30px;
+        font-family: PingFang SC;
+        font-weight: 400;
+        color: rgba(45, 85, 51, 1);
+      }
+      .sec-txt {
+        font-family: PingFang SC;
+        color: rgba(102, 102, 102, 1);
+        position: relative;
+        z-index: 2;
+        font-size: 14px;
+        line-height: 36px;
+      }
+      .sec-bg {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+      .sec-img {
+        width: 100%;
+      }
+    }
+    .sec01 {
+      background: rgba(204, 225, 152, 0.2);
+      .sec-inner {
+        padding: 0 30px;
+      }
+      .sec-tit {
+        margin-bottom: 40px;
+        position: relative;
+        z-index: 2;
+        line-height: 1;
+      }
+      .img01 {
+        width: 311px;
+        margin-bottom: 40px;
+      }
+      .img02 {
+        width: 185px;
+        margin-left: -50px;
+      }
+      .img03 {
+        width: 380px;
+      }
+      .txt01 {
+        margin-bottom: 20px;
+      }
+      .txt02 {
+      }
+      .txt03 {
+      }
+      .inner-t {
+        .inner-t-l {
+        }
+        .inner-t-r {
+          margin-left: 73px;
+        }
+      }
+      .inner-b {
+        .inner-b-l {
+          padding-top: 62px;
+        }
+        .inner-b-r {
+          margin-left: 54px;
+        }
+      }
+    }
+    .sec02 {
+      height: 41rem;
+      background: rgba(239, 234, 238, 1);
+    }
+    .sec03 {
+      height: 41rem;
+      background: rgba(38, 47, 54, 1);
+      .sec-txt {
+        color: rgba(254, 254, 254, 1);
+      }
+    }
+    .sec04 {
+      padding-bottom: 0;
+    }
+    .sec04,
+    .sec07 {
+      .sec-tit {
+      }
+      .sec-desc {
+        padding: 28px 0 80px;
+        font-size: 18px;
+        font-family: PingFang SC;
+        color: rgba(102, 102, 102, 1);
+        letter-spacing: 2px;
+        text-align: center;
+      }
+      .sec04-item {
+        .sec04-item-img {
+          width: 100%;
+        }
+        .sec04-item-bd {
+          padding: 42px 0 82px;
+        }
+        .sec04-item-info {
+          padding-left: 84px;
+          border-left: 1px solid @color;
+        }
+        .sec04-item-tit {
+          padding-top: 8px;
+          margin-bottom: 20px;
+          font-size: 22px;
+          font-family: PingFang SC;
+          color: rgba(68, 80, 51, 1);
+        }
+        .sec04-item-txt {
+          color: rgba(153, 153, 153, 1);
+        }
+      }
+    }
+    .sec05 {
+      overflow: hidden;
+      background: rgba(204, 225, 152, 0.1);
+      .sec-tit {
+        margin-bottom: 2rem;
+      }
+      .sec-img {
+        margin: 3.2rem 0 4.8rem;
+      }
+      .sec-txt {
+        color: #666;
+      }
+    }
+    .sec06 {
+      padding-bottom: 4.2rem;
+      .sec-tit {
+        margin-bottom: 2rem;
+      }
+      .sec-txt01 {
+        color: rgba(153, 153, 153, 1);
+      }
+      .sec-txt {
+        margin-bottom: 2.1rem;
+      }
+      .sec-img01 {
+        margin-bottom: 2.2rem;
+      }
+      .sec-img02 {
+      }
+    }
+
+    .sec07 {
+      padding-bottom: 90px;
+      background: rgba(204, 225, 152, 0.1);
+    }
+    .sec08 {
+      padding: 138px 0 178px;
+      .show-list {
+        height: 100%;
+        position: relative;
+        .show-item {
+          position: relative;
+          .mul {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            .mul-icon {
+              width: 100%;
+            }
+            .mul-tit {
+              font-size: 1.6rem;
+              font-family: PingFang SC;
+              font-weight: bold;
+              color: @color;
+            }
+            .mul-line {
+            }
+            .mul-txt {
+              font-size: 1rem;
+              font-family: PingFang SC;
+              color: rgba(153, 153, 153, 1);
+            }
+          }
+          .item-l {
+            width: 45%;
+            .item-img {
+              width: 100%;
+            }
+          }
+          .item-r {
+            width: 45%;
+          }
+          .line-dot {
+            width: 14px;
+            height: 14px;
+            background-color: @color;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            .translate(-49%, -50%);
+          }
+        }
+        .line-box {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 1px;
+          height: 100%;
+          background-color: @color;
+        }
+      }
+    }
+
     .base-list {
       margin-bottom: 120px;
     }
@@ -1094,7 +1361,7 @@ main {
       }
     }
     .show-list {
-      margin-bottom: 130px;
+      // margin-bottom: 130px;
       position: relative;
       .line-box {
         width: 2px;
@@ -1300,18 +1567,18 @@ main {
         font-size: 30px;
         font-family: PingFang SC;
         color: @color;
-        padding-bottom: 40px;
+        padding-bottom: 35px;
       }
       .about-txt {
         font-size: 16px;
         font-family: PingFang SC;
-        font-weight: bold;
+        // font-weight: bold;
         color: rgba(102, 102, 102, 1);
         line-height: 30px;
         span {
           &:first-child {
             display: inline-block;
-            padding-bottom: 30px;
+            // padding-bottom: 30px;
           }
         }
       }
@@ -1322,7 +1589,8 @@ main {
       .img {
         width: 100%;
         &:first-child {
-          margin-bottom: 32px;
+          margin-top: 15px;
+          // margin-bottom: 32px;
         }
       }
     }
@@ -1495,6 +1763,125 @@ main {
             width: 185px;
           }
         }
+      }
+    }
+  }
+}
+/*****************************
+产品介绍
+*****************************/
+.hot-page {
+  padding-left: 280px;
+  .hot-main {
+    .main-banner {
+      background-image: url(../images/0522/hot-banner.jpg);
+    }
+  }
+  .hot-wrapper {
+    .hot-list {
+      width: 840px;
+      padding: 66px 0 0;
+      margin: 0 auto;
+    }
+    .hot-item {
+      width: 240px;
+      text-align: center;
+      margin-left: 40px;
+      &:nth-child(3n + 1) {
+        margin-left: 0;
+      }
+      &:hover {
+        .item-img {
+          .scale(1.1);
+        }
+      }
+    }
+    .item-hd {
+      width: 100%;
+      height: 240px;
+      overflow: hidden;
+    }
+    .item-img {
+      width: 100%;
+      height: 100%;
+      .transition(all 0.5s);
+    }
+    .item-bd {
+      height: 215px;
+    }
+    .item-tit {
+      padding: 18px 0 10px;
+      font-size: 18px;
+      font-family: Microsoft YaHei;
+      font-weight: bold;
+      color: rgba(45, 85, 51, 1);
+      .text_one();
+    }
+    .item-desc {
+      font-size: 12px;
+      font-family: Microsoft YaHei;
+      color: rgba(153, 153, 153, 1);
+      line-height: 18px;
+      height: 36px;
+      margin-bottom: 24px;
+      .text_hide(2);
+    }
+    .item-btn {
+      width: 161px;
+      display: inline-block;
+      line-height: 40px;
+      text-align: center;
+      background: rgba(45, 85, 51, 1);
+      font-size: 14px;
+      font-family: PingFang SC;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+  #pagination.pagination {
+    padding-bottom: 100px;
+    // 分页按钮大小颜色
+    .el-pager {
+      li {
+        min-width: 40px;
+        height: 40px;
+        padding: 0px;
+        margin: 0px 5px;
+        font-size: 14px;
+        color: #666;
+        line-height: 40px;
+        text-align: center;
+        background-color: #fff;
+        border: 1px solid #dddddd;
+        font-weight: 400;
+        .bs_bb();
+        &:last-child {
+        }
+        &:hover {
+          color: @color;
+        }
+        // ...按钮
+        &.btn-quickprev,
+        &.btn-quicknext {
+          line-height: 36px;
+          color: #333;
+        }
+        // 当前页按钮样式
+        &:not(.disabled).active {
+          background: @color;
+          color: #fff;
+          border: 0;
+        }
+      }
+    }
+    // 上下页按钮
+    .btn-next,
+    .btn-prev {
+      min-width: 40px;
+      height: 40px;
+      border: 1px solid #dddddd;
+      background-color: #fff;
+      &:hover {
       }
     }
   }
@@ -1895,12 +2282,94 @@ main {
 *****************************/
 .advantage-page {
   padding-left: 280px;
-  .main-banner {
-    background-image: url(../images/others/Joininvestment.jpg);
-  }
-  .advantage-wrapper {
-    .img {
-      width: 100%;
+  // .main-banner {
+  //   background-image: url(../images/others/Joininvestment.jpg);
+  // }
+  // .advantage-wrapper {
+  //   .img {
+  //     width: 100%;
+  //   }
+  // }
+  .advantage-main {
+    .img-box {
+      .img {
+        width: 100%;
+      }
+    }
+    .img-box10 {
+      position: relative;
+      .inf-list {
+        width: 95%;
+        position: absolute;
+        top: 42%;
+        left: 50%;
+        z-index: 2;
+        transform: translateX(-50%);
+      }
+      .inf-item {
+        width: 32%;
+        margin-left: 2%;
+        border: 1px solid rgba(240, 234, 217, 1);
+        &:first-child {
+          margin-left: 0;
+        }
+        .item-t {
+          margin-bottom: 14px;
+          .item-img {
+            width: 100%;
+            // height: 795px;
+          }
+        }
+        .item-b {
+          // height: 375px;
+          // padding: 26px 27px;
+          background: rgba(240, 234, 217, 1);
+          .item-tit {
+            // font-size:53px;
+            font-weight: normal;
+            color: rgba(95, 123, 48, 1);
+            // margin-bottom: 22px;
+            .text_one();
+          }
+          .item-desc {
+            // font-size:30px;
+            font-weight: normal;
+            color: rgba(95, 123, 48, 1);
+            // line-height:47px;
+            .text_hide(5);
+          }
+        }
+      }
+    }
+    .img-box12 {
+      position: relative;
+      margin-top: -6%;
+      .img {
+        width: 100%;
+      }
+      .link-img {
+        width: 100%;
+      }
+      // background-color: #f2ebdb;
+      // height: 1800px;
+      // .link01 {
+      //   width: 90%;
+      //   position: absolute;
+      //   top: 7%;
+      //   left: 50%;
+      //   transform: translateX(-50%);
+      // }
+      // .link02 {
+      //   // display: none;
+      //   width: 90%;
+      //   position: absolute;
+      //   bottom: 5%;
+      //   left: 50%;
+      //   transform: translateX(-50%);
+      // }
+      // .link-img {
+      //   width: 100%;
+      // }
     }
   }
 }
@@ -1916,7 +2385,7 @@ main {
     .tit-cn {
       font-size: 36px;
       font-family: PingFang SC;
-      font-weight: bold;
+      font-weight: 400;
       color: rgba(255, 255, 255, 1);
       padding-bottom: 20px;
       position: relative;
@@ -1935,7 +2404,7 @@ main {
       padding-top: 14px;
       font-size: 18px;
       font-family: PingFang SC;
-      font-weight: bold;
+      font-weight: 400;
       color: rgba(255, 255, 255, 1);
     }
   }

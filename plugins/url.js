@@ -16,6 +16,12 @@ const api = {
 
   /* 联系我们*/
   submitJoin: host + '/contact/submit', // 联系我们 提交加盟信息
+
+  /* 热销列表*/
+  getHotList: host + '/product/hotList',
+
+  /* 获取创业者（荟宝优势）*/
+  getEntrepreneursList: host + '/product/entrepreneursList',
 }
 
 export default api

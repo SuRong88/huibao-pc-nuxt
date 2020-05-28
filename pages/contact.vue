@@ -4,8 +4,10 @@
     <main class="contact-main">
       <div class="main-banner common-banner">
         <div class="banner-title-box">
-          <h2 class="tit-cn">联系我们</h2>
-          <h2 class="tit-en">Contact us</h2>
+          <!-- <h2 class="tit-cn">联系我们</h2>
+          <h2 class="tit-en">Contact us</h2> -->
+          <h2 class="tit-cn">申请办法</h2>
+          <h2 class="tit-en">How to apply</h2>
         </div>
       </div>
       <div class="contact-wrapper flex">
@@ -17,8 +19,8 @@
         <div class="contact-enter">
           <h3 class="enter-tit">加盟“我家的荟宝妆园”</h3>
           <div class="enter-list clearfix">
-            <input v-model="surname" @keyup.enter="submitHandle" class="enter-item fl" placeholder="姓氏" type="text" />
-            <input v-model="name" @keyup.enter="submitHandle" class="enter-item fl" placeholder="名字" type="text" />
+            <input v-model="name" @keyup.enter="submitHandle" class="enter-item fl" placeholder="姓名" type="text" />
+            <input v-model="phone" @keyup.enter="submitHandle" class="enter-item fl" placeholder="手机" type="text" />
             <input v-model="email" @keyup.enter="submitHandle" class="enter-item fl" placeholder="电子邮箱" type="text" />
             <input v-model="website" @keyup.enter="submitHandle" class="enter-item fl" placeholder="网址" type="text" />
             <textarea v-model="leaveMsg" @keyup.enter="submitHandle" class="enter-item enter-item-mul fl" placeholder="留言" type="text"></textarea>
@@ -61,7 +63,8 @@ export default {
         params: {
           type: 'custom',
           client: 1,
-          module_id: 'contact'
+          module_id: 'apply'
+          // module_id: 'contact'
         }
       })
     ]);
@@ -73,8 +76,8 @@ export default {
   data() {
     return {
       SEOInfo: {},
-      surname: '',
       name: '',
+      phone: '',
       email: '',
       website: '',
       leaveMsg: ''
@@ -82,11 +85,15 @@ export default {
   },
   methods: {
     submitHandle() {
-      if (this.$nullTest(this.surname)) {
-        return this.$errorToast('请输入姓氏');
-      }
+
       if (this.$nullTest(this.name)) {
-        return this.$errorToast('请输入名字');
+        return this.$errorToast('请输入姓名');
+      }
+      if (this.$nullTest(this.phone)) {
+        return this.$errorToast('请输入手机');
+      }
+      if (!this.$checkPhone(this.phone)) {
+        return this.$errorToast('手机格式有误');
       }
       if (this.$nullTest(this.email)) {
         return this.$errorToast('请输入邮箱');
@@ -103,16 +110,16 @@ export default {
       // 提交加盟信息
       this.$axios
         .post(URL.submitJoin, {
-          surname: this.surname,
           name: this.name,
+          phone: this.phone,
           email: this.email,
           website: this.website,
           leave_msg: this.leaveMsg
         })
         .then(res => {
           this.$successToast('提交成功');
-          this.surname = '';
           this.name = '';
+          this.phone = '';
           this.email = '';
           this.website = '';
           this.leaveMsg = '';

@@ -80,7 +80,7 @@ export default {
   // 代理的配置项
   proxy: {
     '/api': {
-      target: 'http://qy30.mrxdtech.com/api',
+      target: 'http://www.veibao.com/api',
       pathRewrite: {
         '^/api': '/'
       }
